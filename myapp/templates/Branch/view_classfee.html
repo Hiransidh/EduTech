@@ -1,0 +1,45 @@
+{% extends 'Branch/branch_home.html'%}
+{% block x %}
+
+<table>
+    <tr>
+        <td rowspan="2">Student Name</td>
+        <td rowspan="2">Total Amount</td>
+        <td colspan="3">Installment No</td>
+        <td rowspan="2">Pending Amount</td>
+      </tr>
+      <tr>
+        
+        {% for i in data %}
+            <td>{{ i.installment_no }}</td>
+        {% endfor %}
+            
+      
+        
+      </tr>
+      <tr>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+      </tr>
+</table>
+{% endblock %}

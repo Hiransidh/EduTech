@@ -1,0 +1,29 @@
+{% extends 'Admin/admin_home.html'%}
+{% block x %}
+
+<body>
+  <form id="form1" name="form1" method="post" action="">
+    <table class="table table-bordered table-hover">
+      <tr>
+        <th>SI No</th>
+        <th>Course Name</th>
+        <th>Total Amount</th>
+        <th>No of Instalments</th>
+        <th>Payment per Instalment</th>
+      </tr>
+      {% for i in data %}
+      
+      <tr>
+        <td>{{forloop.counter}}</td>
+        <td>{{ i.course_id.course_name }}</td>
+        <td>{{ i.amount }}</td>
+        <td>{{ i.course_id.no_of_installments }}</td>
+        <td>{{ i.payment_per_month }}</td>
+        <td><a href="/edit_fees/{{ i.course_id }}#mysec" class="btn btn-primary btn-sm">Edit</a></td>
+        
+      </tr>
+      {% endfor %}
+    </table>
+  </form>
+</body>
+{% endblock x %}

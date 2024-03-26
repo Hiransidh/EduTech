@@ -1,0 +1,89 @@
+{% extends 'Admin/admin_home.html' %}
+{% block x %}
+
+<body>
+
+    <style>
+        .glassmorphic-card {
+            background: rgba(41, 151, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.125);
+            padding: 20px;
+            width: 50%; /* Added this line */
+            margin: 0 auto; /* Added this line */
+        }
+    
+        .form-group {
+            margin-bottom: 20px;
+        }
+    
+        .form-control {
+            background: rgba(255, 255, 255);
+            border: 1px solid rgba(255, 255, 255, 0.125);
+            border-radius: 10px;
+            padding: 10px;
+            width: 100%;
+        }
+    
+        label {
+            color: rgb(0, 0, 0);
+            font-size: 20px;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+    
+        .btn-primary {
+            background: #f96d00;
+            border: 1px solid #f96d00;
+            border-radius: 10px;
+            padding: 10px 20px;
+            font-size: 20px;
+            font-weight: 500;
+            color: #fff;
+            cursor: pointer;
+        }
+    
+        .btn-primary:hover {
+            background: #f96d00;
+            border: 1px solid #f96d00;
+            border-radius: 10px;
+        }
+    </style>
+
+<div class="card glassmorphic-card">
+    <div class="card-body">
+
+    <form action="/add_branch_post/" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="branchId">Branch ID</label>
+            <input type="text" class="form-control" id="branchId" name="branch_id" placeholder="Enter branch ID" required>
+        </div>
+        <div class="form-group">
+            <label for="branchName">Branch Name</label>
+            <input type="text" class="form-control" id="branchName" name="branch_name" placeholder="Enter branch name"
+                required>
+        </div>
+
+        <div class="form-group">
+            <label for="branchLocation">Branch Location</label>
+            <input type="text" class="form-control" id="branchLocation" name="location"
+                placeholder="Enter branch location" required>
+        </div>
+        <div class="form-group">
+            <label for="branchEmail">Branch Email</label>
+            <input type="email" class="form-control" id="branchEmail" name="email" placeholder="Enter branch email" required>
+        </div>
+        <div class="form-group">
+            <label for="branchPhone">Branch Phone</label>
+            <input type="tel" class="form-control" id="branchPhone" placeholder="Enter branch phone number"
+                name="phone" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Add Branch</button>
+    </form>
+    </div>
+</div>
+
+</body>
+{% endblock x %}

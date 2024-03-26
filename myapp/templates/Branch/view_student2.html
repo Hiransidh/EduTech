@@ -1,0 +1,18 @@
+{% extends 'Branch/branch_home.html' %}
+
+{% block x %}
+    
+
+    
+<div id="student-details">
+    <h2>Student Details</h2>
+    <p>Name: <span id="student-name">{{data.student_name}}</span></p>
+    <p>DOB: <span id="student-dob">{{data.dob2}}</span></p>
+    <p>Course: <span id="student-course">{{data.batch_id.course_id.course_name}}</span></p>
+    <p>Phone: <span id="student-phone">{{data.phone}}</span></p>
+    <p>Email: <span id="student-email">{{data.email}}</span></p>
+    <p>Qualification: <span id="student-qualification">{{data.qualification}}</span></p>
+    <p>Address: <span id="student-address">{{data.house}}, {{data.city}}, {{data.state}}, {{data.pincode}}</span></p>
+    <p>Batch: <span></span></p>
+</div>
+{% endblock x %}

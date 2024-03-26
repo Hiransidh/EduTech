@@ -1,0 +1,27 @@
+{% extends 'Coordinator/coordinator_home.html' %}
+{% block x %}
+
+<body>
+  <form id="form1" name="form1" method="post" action="">
+    <table class="table table-bordered table-hover">
+      <tr>
+        <th>SI No</th>
+        <th>Batch Name</th>
+        <th>Course Name</th>
+        <th>Staff Name</th>
+      </tr>
+      {% for i in data %}
+      <tr>
+        <td>{{forloop.counter}}</td>
+        <td>{{ i.batch_name }}</td>
+        <td>{{ i.course_id.course_name }}</td>
+        <td>{{ i.staff_id.staff_name }}</td>
+       
+        <td><a href="" class="btn btn-primary btn-sm">Edit</a></td>
+        <td><a href="" class="btn btn-danger btn-sm">Delete</a></td>
+      </tr>
+      {% endfor %}
+    </table>
+  </form>
+</body>
+{% endblock x %}

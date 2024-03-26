@@ -1,0 +1,40 @@
+{% extends 'Admin/admin_home.html' %}
+{% block x %}
+
+<body>
+  <form id="form1" name="form1" method="post" action="">
+    <table class="table table-bordered table-hover">
+      <tr>
+        
+        <th>Course ID</th>
+        <th>Course Name</th>
+        <th>Course Duration</th>
+        <th>Course Description</th>
+        <th>No of Instalments</th>
+        <th>Subjects</th>
+      </tr>
+      {% for course, subjects in course_subjects %}
+<tr>
+    <td>{{ course.course_id }}</td>
+    <td>{{ course.course_name }}</td>
+    <td>{{ course.course_duration }}</td>
+    <td>{{ course.description }}</td>
+    <td>{{ course.no_of_installments }}</td>
+    <td>
+        {% for subject in subjects %}
+            {{ subject }}
+        {% endfor %}
+    </td>
+    <td><a href="/edit_course/{{ course.course_id }}#mysec" class="btn btn-primary btn-sm">Edit</a></td>
+    <td><a href="/delete_course/{{ course.course_id }}#mysec" class="btn btn-danger btn-sm">Delete</a></td>
+</tr>
+{% endfor %}
+    </table>
+  </form>
+
+</body>
+
+
+{% endblock x %}
+
+

@@ -1,0 +1,36 @@
+{% extends 'Admin/admin_home.html' %}
+{% block x %}
+
+<body>
+    <form id="form1" name="form1" method="post" action="">
+        <table class="table table-bordered table-hover">
+            <tr>
+                <th>Question No</th>
+                <th>Question</th>
+                <th>Option1</th>
+                <th>Option2</th>
+                <th>Option3</th>
+                <th>Option4</th>
+                <th>Answer</th>
+            </tr>
+            
+            {% for i in data %}
+            <tr>
+                <td>{{ forloop.counter}}</td>
+                <td>{{ i.question }}</td>
+                <td>{{ i.option1 }}</td>
+                <td>{{ i.option2 }}</td>
+                <td>{{ i.option3 }}</td>
+                <td>{{ i.option4 }}</td>
+                <td>{{ i.answer }}</td>
+                <td><a href="/edit_elig_quest/{{ i.id }}#mysec" class="btn btn-primary btn-sm">Edit</a></td>
+                <td><a href="/delete_elig_quest/{{ i.id }}#mysec" class="btn btn-danger btn-sm">Delete</a></td>
+            </tr>
+
+            {% endfor %}
+                
+        </table>
+    </form>
+</body>
+
+{% endblock x %}

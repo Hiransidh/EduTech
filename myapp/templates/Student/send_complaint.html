@@ -1,0 +1,13 @@
+{% extends 'Student/student_home.html'%}
+{% block x %}
+
+<body>
+
+    <form action="/send_complaint" method="POST">
+        <label for="complaint">Complaint:</label>
+        <textarea id="complaint" name="complaint" rows="4" cols="50"></textarea>
+        <br>
+        <input type="submit" value="Submit">
+    </form>
+   
+</body>

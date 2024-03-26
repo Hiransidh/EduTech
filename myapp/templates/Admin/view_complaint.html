@@ -1,0 +1,29 @@
+{% extends 'Admin/admin_home.html'%}
+{% block x %}
+
+<body>
+    <form id="form1" name="form1" method="post" action="">
+        <table class="table table-bordered table-hover">
+            <tr>
+                <th>SI No</th>
+                <th>Student Name</th>
+                <th>Branch Name</th>
+                <th>Complaint Date</th>
+                <th>Complaint Status</th>
+            </tr>
+            {% for i in data %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ i.complaint_id }}</td>
+                <td>{{ i.STUDENT.student_name }}</td>
+                <td>{{ i.BRANCH.branch_name}}</td>
+                <td>{{ i.complaint_date }}</td>
+                <td>{{ i.complaint_status }}</td>
+                <td><a href="/view_complaint/{{ i.complaint_id }}#mysec" class="btn btn-success btn-sm">View</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </form>
+</body>
+
+{% endblock %}

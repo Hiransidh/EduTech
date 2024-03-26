@@ -1,0 +1,92 @@
+{% extends 'Admin/admin_home.html' %}
+{% block x %}
+
+<body>
+
+  <style>
+    .glassmorphic-card {
+      background: rgba(41, 151, 255, 0.2);
+      backdrop-filter: blur(10px);
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.125);
+      padding: 20px;
+      width: 50%; /* Added this line */
+      margin: 0 auto; /* Added this line */
+    }
+  
+    .form-group {
+      margin-bottom: 20px;
+    }
+  
+    .form-control {
+      background: rgba(255, 255, 255);
+      border: 1px solid rgba(255, 255, 255, 0.125);
+      border-radius: 10px;
+      padding: 10px;
+      width: 100%;
+    }
+  
+    label {
+      color: rgb(0, 0, 0);
+      font-size: 20px;
+      font-weight: 500;
+      margin-bottom: 10px;
+    }
+  
+    .btn-primary {
+      background: #f96d00;
+      border: 1px solid #f96d00;
+      border-radius: 10px;
+      padding: 10px 20px;
+      font-size: 20px;
+      font-weight: 500;
+      color: #fff;
+      cursor: pointer;
+    }
+  
+    .btn-primary:hover {
+      background: #f96d00;
+      border: 1px solid #f96d00;
+      border-radius: 10px;
+    }
+    
+    .form-row {
+      display: flex;
+      flex-wrap: wrap;
+      margin-right: -5px;
+      margin-left: -5px;
+    }
+    
+    .form-row .form-group {
+      flex: 0 0 50%;
+      max-width: 50%;
+      padding-right: 5px;
+      padding-left: 5px;
+    }
+    
+  </style>
+
+<div class="card glassmorphic-card">
+  <div class="card-body">
+
+  <form action="/add_fees_post/" method="post">
+    {% csrf_token %}
+    <div class="form-group">
+      <label>Course</label>
+      <select class="form-control" id="staffPosition" name="course_name" required>
+        {% for i in data %}
+          <option value="{{ i.course_id }}">{{ i.course_name }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="branchId">Amount</label>
+      <input type="number" class="form-control"name="amount" placeholder="Enter Amount" required>
+  </div>
+    <button type="submit" class="btn btn-primary">Add Amount</button>
+  </form>
+  </div>
+</div>
+
+</body>
+{% endblock x %}

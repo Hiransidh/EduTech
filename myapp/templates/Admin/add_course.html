@@ -1,0 +1,115 @@
+{% extends 'Admin/admin_home.html' %}
+{% block x %}
+
+<body>
+
+  <style>
+    .glassmorphic-card {
+      background: rgba(41, 151, 255, 0.2);
+      backdrop-filter: blur(10px);
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.125);
+      padding: 20px;
+      width: 50%; 
+      margin: 0 auto;
+    }
+  
+    .form-group {
+      margin-bottom: 20px;
+    }
+  
+    .form-control {
+      background: rgba(255, 255, 255);
+      border: 1px solid rgba(255, 255, 255, 0.125);
+      border-radius: 10px;
+      padding: 10px;
+      width: 100%;
+    }
+  
+    label {
+      color: rgb(0, 0, 0);
+      font-size: 20px;
+      font-weight: 500;
+      margin-bottom: 10px;
+    }
+  
+    .btn-primary {
+      background: #f96d00;
+      border: 1px solid #f96d00;
+      border-radius: 10px;
+      padding: 10px 20px;
+      font-size: 20px;
+      font-weight: 500;
+      color: #fff;
+      cursor: pointer;
+    }
+  
+    .btn-primary:hover {
+      background: #f96d00;
+      border: 1px solid #f96d00;
+      border-radius: 10px;
+    }
+
+    #additionalSubjects {
+      margin-bottom: 30px; /* Add more margin-bottom here */
+    }
+  </style>
+
+<div class="card glassmorphic-card">
+  <div class="card-body">
+
+  <form action="/add_course_post/" method="post">
+    {% csrf_token %}
+    <!-- <div class="form-group">
+      <label for="courseId">Course ID</label>
+      <input type="text" class="form-control" id="courseId" name="course_id" placeholder="Enter course ID" required>
+    </div> -->
+    <div class="form-group">
+      <label for="courseName">Course Name</label>
+      <input type="text" class="form-control" id="courseName" name="course_name" placeholder="Enter course name"
+        required>
+    </div>
+
+    <div class="form-group">
+      <label for="courseDuration">Course Duration (months)</label>
+      <input type="text" class="form-control" id="courseDuration" name="course_duration"
+        placeholder="Enter course duration" required>
+    </div>
+    <div class="form-group">
+      <label for="courseDescription">Course Description</label>
+      <textarea class="form-control" name="description" id="courseDescription" rows="3"
+        placeholder="Enter course description" required></textarea>
+    </div>
+    <div class="form-group">
+      <label for="installments">Number of Installments</label>
+      <input type="number" class="form-control" id="installments" placeholder="Enter number of installments"
+        name="no_of_installments" required>
+    </div>
+    <div class="form-group">
+      <label for="subject">Subject</label>
+      <input type="text" class="form-control" id="subject" name="subject" placeholder="Enter subject" required>
+    </div>
+    <div id="additionalSubjects">
+      <!-- Additional subjects will be added here dynamically -->
+    </div>
+    <button type="button" class="btn btn-primary" onclick="addSubject()">+</button>
+    <button type="submit" class="btn btn-primary">Add Course</button>
+  </form>
+  </div>
+</div>
+
+<script>
+  function addSubject() {
+    var additionalSubjectsDiv = document.getElementById("additionalSubjects");
+    var newSubjectInput = document.createElement("input");
+    newSubjectInput.type = "text";
+    newSubjectInput.className = "form-control";
+    newSubjectInput.name = "additional_subjects_" + (additionalSubjectsDiv.children.length / 2);  // append an index to the name
+    newSubjectInput.placeholder = "Enter additional subject";
+    additionalSubjectsDiv.appendChild(newSubjectInput);
+    additionalSubjectsDiv.appendChild(document.createElement("br")); 
+  }
+</script>
+
+</body>
+{% endblock x %}

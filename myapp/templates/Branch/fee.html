@@ -1,0 +1,23 @@
+{% extends 'Branch/branch_home.html'%}
+{% block x %}
+
+<style>
+    .batch-link {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #333;
+        color: #fff;
+        text-decoration: none;
+        font-weight: bold;
+        margin: 10px; /* Add margin-bottom for space between links */
+        border-radius: 5px;
+    }
+</style>
+
+{% for i in data %}
+
+    <a href="/view_fee2/{{ i.batch_id }}#mysec" class="batch-link">{{ i.batch_name }}</a>
+
+{% endfor %}
+
+{% endblock %}

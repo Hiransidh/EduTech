@@ -1,0 +1,35 @@
+{% extends 'Mentor/mentor_home.html' %}
+{% block x %}
+
+
+{% for i in data1  %}
+
+<h4>{{i.batch_name}}</h4>
+
+<table class="table table-bordered">
+    <tr>
+        <th>Day</th>
+        
+        {% for i in data  %}
+            <th>{{i.start_time}}-{{i.end_time}}</th>
+        {% endfor %}
+            
+    </tr>
+    {% for i in data %}
+    <tr>
+        <td>{{i.day}}</td>
+        {% for j in data2 %}
+            {% if j.day == i.day %}
+                {% if j.batch_id == i.batch_id %}
+                    <td>{{j.subject_id.subject_name}}<br>{{j.staff_id.staff_name}}</td>
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+    </tr>
+    {% endfor %}
+
+    {% endfor %}
+
+</table>
+    
+    {% endblock %}

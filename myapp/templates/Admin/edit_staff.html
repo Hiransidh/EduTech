@@ -1,0 +1,143 @@
+{% extends 'Admin/admin_home.html' %}
+{% block x %}
+
+<body>
+
+    <style>
+        .glassmorphic-card {
+            background: rgba(41, 151, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.125);
+            padding: 20px;
+            width: 50%;
+            /* Added this line */
+            margin: 0 auto;
+            /* Added this line */
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-control {
+            background: rgba(255, 255, 255);
+            border: 1px solid rgba(255, 255, 255, 0.125);
+            border-radius: 10px;
+            padding: 10px;
+            width: 100%;
+        }
+
+        label {
+            color: rgb(0, 0, 0);
+            font-size: 20px;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+
+        .btn-primary {
+            background: #f96d00;
+            border: 1px solid #f96d00;
+            border-radius: 10px;
+            padding: 10px 20px;
+            font-size: 20px;
+            font-weight: 500;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            background: #f96d00;
+            border: 1px solid #f96d00;
+            border-radius: 10px;
+        }
+
+        .form-row {
+            display: flex;
+            flex-wrap: wrap;
+            margin-right: -5px;
+            margin-left: -5px;
+        }
+
+        .form-row .form-group {
+            flex: 0 0 50%;
+            max-width: 50%;
+            padding-right: 5px;
+            padding-left: 5px;
+        }
+    </style>
+
+    <div class="card glassmorphic-card">
+        <div class="card-body">
+data
+            <form action="/edit_staff_post/#mysec" method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="staffId">Staff ID</label>
+                    <input type="text" class="form-control" id="staffId" name="staff_id" placeholder="Enter staff ID"
+                        value="{{ data.staff_id }}" required>
+                </div>
+                <div class="form-group">
+                    <label for="staffName">Staff Name</label>
+                    <input type="text" class="form-control" id="staffName" name="staff_name"
+                        placeholder="Enter staff name" value="{{ data.staff_name }}" required>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="staffEmail">Email</label>
+                        <input type="email" class="form-control" id="staffEmail" name="email"
+                            placeholder="Enter staff email" value="{{ data.email }}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="staffPhone">Phone</label>
+                        <input type="tel" class="form-control" id="staffPhone" placeholder="Enter staff phone number"
+                            name="phone" value="{{ data.phone }}" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="qualification">Qualification</label>
+                    <input type="text" class="form-control" id="qualification" name="qualification"
+                        placeholder="Enter qualification" value="{{ data.qualification }}" required>
+                </div>
+                <div class="form-group">
+                    <label for="staffHome">House</label>
+                    <input type="text" class="form-control" name="house" placeholder="Enter house name"
+                        value="{{ data.house }}" required>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col">
+                            <label for="staffCity">City</label>
+                            <input type="text" class="form-control" id="staffCity" name="city" placeholder="Enter city"
+                                value="{{ data.city }}" required>
+                        </div>
+                        <div class="col">
+                            <label for="staffState">State</label>
+                            <input type="text" class="form-control" id="staffState" name="state"
+                                placeholder="Enter state" value="{{ data.state }}" required>
+                        </div>
+                        <div class="col">
+                            <label for="staffZip">Pin Code</label>
+                            <input type="text" class="form-control" name="pincode" placeholder="Enter pin code"
+                                value="{{ data.pincode }}" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="staffType">Staff Type</label>
+                    <select class="form-control" id="staffPosition" name="staff_type" required>
+                        <option value="Branch Staff" {% if data.staff_type == "Branch Staff" %}selected{% endif %}>Branch Staff</option>
+                        <option value="Course Coordinator" {% if data.staff_type == "Course Coordinator" %}selected{% endif %}>Course Coordinator</option>
+                        <option value="Teacher" {% if data.staff_type == "Teacher" %}selected{% endif %}>Teacher</option>
+
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Update Staff</button>
+            </form>
+        </div>
+    </div>
+
+</body>
+{% endblock x %}

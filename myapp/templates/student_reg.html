@@ -1,0 +1,188 @@
+{% extends 'login.html' %}
+{% block x %}
+
+<body>
+
+    <style>
+        .glassmorphic-card {
+            background: rgba(41, 151, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.125);
+            padding: 20px;
+            width: 50%;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-control {
+            background: rgba(255, 255, 255);
+            border: 1px solid rgba(255, 255, 255, 0.125);
+            border-radius: 10px;
+            padding: 10px;
+            width: 100%;
+        }
+
+        label {
+            color: rgb(0, 0, 0);
+            font-size: 20px;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+
+        .btn-primary {
+            background: #f96d00;
+            border: 1px solid #f96d00;
+            border-radius: 10px;
+            padding: 10px 20px;
+            font-size: 20px;
+            font-weight: 500;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            background: #f96d00;
+            border: 1px solid #f96d00;
+            border-radius: 10px;
+        }
+
+        input[type="file"] {
+            height: auto;
+        }
+
+        .form-row {
+            display: flex;
+            flex-wrap: wrap;
+            margin-right: -5px;
+            margin-left: -5px;
+        }
+
+        .form-row .form-group {
+            flex: 0 0 50%;
+            max-width: 50%;
+            padding-right: 5px;
+            padding-left: 5px;
+        }
+    </style>
+
+    <div>
+        <ul>
+            <li>Welcome to the student registration page.</li>
+            <li>Please fill out the form below to register as a student.</li>
+            <li>After registration, there will be an eligibility test to check your eligibility for the course.</li>
+        </ul>
+    </div>
+    <div class="card glassmorphic-card">
+        <div class="card-body">
+
+            <h1>Student Registration</h1>
+
+
+
+            <form action="/add_student_post/" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                <div class="form-group">
+                    <label for="branch">Branch</label>
+                    <select class="form-control" id="branch" name="branch" required>
+                        <option value="">Select branch</option>
+
+                        {% for i in data %}
+                        <option value="{{ i.branch_id }}">{{ i.branch_name}}</option>
+                        {% endfor %}
+
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="student_image">Student Image</label>
+                    <input type="file" class="form-control" id="student_image" name="student_image"
+                        placeholder="Enter student image" required>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="studentName">Student Name</label>
+                    <input type="text" class="form-control" id="studentName" name="student_name"
+                        placeholder="Enter student name" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="studentDob">Date of Birth</label>
+                        <input type="date" class="form-control" id="studentDob" name="dob" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Qualification</label>
+                        <input type="text" class="form-control" name="qualification"
+                            placeholder="Enter student qualification" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="staffEmail">Email</label>
+                        <input type="email" class="form-control" name="email" placeholder="Enter email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="staffPhone">Phone</label>
+                        <input type="tel" class="form-control" placeholder="Enter phone number" name="phone" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="studentAddress">House name</label>
+                    <textarea class="form-control" name="house" id="studentAddress" rows="3"
+                        placeholder="Enter house name" required></textarea>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="studentAddress">Street</label>
+                        <input type="text" class="form-control" id="studentStreet" name="street"
+                            placeholder="Enter street" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="staffCity">City</label>
+                        <input type="text" class="form-control" id="staffCity" name="city" placeholder="Enter city"
+                            required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col">
+                        <label for="staffState">State</label>
+                        <input type="text" class="form-control" id="staffState" name="state" placeholder="Enter state"
+                            required>
+                    </div>
+                    <div class="col">
+                        <label for="staffZip">Pin Code</label>
+                        <input type="text" class="form-control" name="pincode" placeholder="Enter pin code" required>
+                    </div>
+                </div>
+        </div>
+        <div class="form-group">
+            <label for="studentCourse">Course</label>
+            <select class="form-control" id="studentCourse" name="course" required>
+                <option value="">Select course</option>
+
+                {% for i in data1 %}
+                <option value="{{ i.course_id }}">{{ i.course_name }}</option>
+                {% endfor %}
+
+
+
+            </select>
+        </div>
+
+
+
+        <button type="submit" class="btn btn-primary">Register</button>
+        </form>
+    </div>
+    </div>
+
+</body>
+{% endblock x %}
