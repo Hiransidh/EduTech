@@ -88,7 +88,9 @@ class student(models.Model):
     city = models.CharField(max_length=100)
     state = models.CharField(max_length=100)
     pincode = models.IntegerField()
-    batch_id = models.ForeignKey('batch',on_delete=models.CASCADE)
+    course_id = models.ForeignKey('course',on_delete=models.CASCADE)
+    branch_id = models.ForeignKey('branch',on_delete=models.CASCADE)
+    
     class Meta:
         db_table = "student"
         
@@ -122,5 +124,17 @@ class eligibility(models.Model):
     option3 = models.CharField(max_length=100)
     option4 = models.CharField(max_length=100)
     answer = models.CharField(max_length=100)
+    status = models.CharField(max_length=100)
     class Meta:
         db_table = "eligibility"
+class Result(models.Model):
+    test_id=models.IntegerField(primary_key=True)
+    STUDENT=models.ForeignKey(student,on_delete=models.CASCADE)
+    impression=models.CharField(max_length=90)
+    date=models.DateField(max_length=90)
+    time=models.CharField(max_length=90)
+    
+    status=models.CharField(max_length=90)
+
+    class Meta:
+        db_table = "Result"        

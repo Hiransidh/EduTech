@@ -26,6 +26,11 @@ urlpatterns = [
     path('login_post/', views.login_post),
     path('logout/', views.logout),
     path('student_reg/', views.student_reg),
+    path('student_reg_post/', views.student_reg_post),
+    path('eligibility_test/', views.eligibility_test),
+    path('eligible/', views.eligible),
+    path('not_eligible/', views.not_eligible),
+    
     
     # --------- Admin ---------
     
@@ -55,12 +60,18 @@ urlpatterns = [
     path('add_fees/',views.add_fees),
     path('add_fees_post/',views.add_fees_post),
     path('view_fees/',views.view_fees),
+    path('attendtest/',views.attendtest),
+    path('option1/<str:opid>/<str:qid>',views.option1),
+    path('option2/<str:opid>/<str:qid>',views.option2),
+    path('option3/<str:opid>/<str:qid>',views.option3),
+    path('option4/<str:opid>/<str:qid>',views.option4),
+    path('finishexam/',views.finishexam),
     
     #----------- Branch -----------
     
     path('branch_home/', views.branch_home),
-    path('add_student/', views.add_student),
-    path('add_student_post/', views.add_student_post),
+    # path('add_student/', views.add_student),
+    # path('add_student_post/', views.add_student_post),
     path('view_student/', views.view_student),
     path('view_student2/<int:id>', views.view_student2),
     path('view_staff1/', views.view_staff1),

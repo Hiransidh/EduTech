@@ -1,0 +1,185 @@
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f2f2f2;
+        margin: 0;
+        padding: 20px;
+    }
+
+    h1 {
+        text-align: center;
+        color: #333;
+    }
+
+    .eligibility-form {
+        max-width: 600px;
+        margin: 0 auto;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+        color: #333;
+        margin-bottom: 10px;
+    }
+
+    p {
+        color: #666;
+        margin-bottom: 20px;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    input[type="radio"] {
+        margin-right: 5px;
+    }
+
+    .options-container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 10px;
+    }
+
+    button[type="submit"] {
+        background-color: #4CAF50;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+    button[type="submit"]:hover {
+        background-color: #45a049;
+    }
+
+    .timer {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        font-size: 48px;
+        color: #333;
+
+    }
+
+    /* .start-button {
+        background-color: #4CAF50;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        margin-bottom: 20px;
+        margin: 0 auto; 
+        display: block;
+    } */
+
+    /* .hidden {
+        display: none;
+    } */
+</style>
+
+<body>
+    <h1>Eligibility Test</h1>
+
+    <!-- <div class="timer" id="timer">3:00</div> -->
+
+    <!-- <button class="start-button" id="startButton">Start</button> -->
+
+    <form class="eligibility-form hidden" action="" method="post" id="questionForm">
+        {% for i in data  %}
+        <h2>Question {{ forloop.counter }}</h2>
+        <p>{{i.question}}</p>
+        <div class="options-container">
+            <label>
+                <input type="radio" name="answer" value="{{i.option1}}" required> {{i.option1}}
+            </label>
+            <label>
+                <input type="radio" name="answer" value="{{i.option2}}" required> {{i.option2}}
+            </label>
+            <label>
+                <input type="radio" name="answer" value="{{i.option3}}" required> {{i.option3}}
+            </label>
+            <label>
+                <input type="radio" name="answer" value="{{i.option4}}" required> {{i.option4}}
+            </label>
+        </div>
+        {% endfor %}
+        <button type="submit">Submit</button>
+    </form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- <script>
+        var startButton = document.getElementById("startButton");
+        var questionForm = document.getElementById("questionForm");
+        // var timerElement = document.getElementById("timer");
+        // var minutes = 3;
+        // var seconds = 0;
+        // var timerInterval;
+
+        startButton.addEventListener("click", function() {
+            startButton.classList.add("hidden");
+            questionForm.classList.remove("hidden");
+            // timerInterval = setInterval(updateTimer, 1000);
+        });
+
+        // function updateTimer() {
+        //     seconds--;
+        //     if (seconds < 0) {
+        //         minutes--;
+        //         seconds = 59;
+        //     }
+
+        //     if (minutes === 0 && seconds === 0) {
+        //         // Timer has reached 0:00, perform any actions here
+        //         clearInterval(timerInterval);
+        //     }
+
+        //     timerElement.textContent = minutes.toString().padStart(2, "0") + ":" + seconds.toString().padStart(2, "0");
+        // }
+    </script> -->
+</body>

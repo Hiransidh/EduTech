@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect,HttpResponse
 from myapp.models import *
 from datetime import datetime
+import datetime
 
 from django.core.files.storage import FileSystemStorage
 # Create your views here.
@@ -81,6 +82,29 @@ def student_reg(request):
     data1 = course.objects.all()
     return render(request, 'student_reg.html', {'data': data, 'data1': data1})
 
+def student_reg_post(request):
+    data = student()
+    data.student_image = request.FILES['student_image']
+    data.student_name = request.POST.get('student_name')
+    data.dob2 = request.POST.get('dob')
+    data.email = request.POST.get('email')
+    data.phone = request.POST.get('phone')
+    data.qualification = request.POST.get('qualification')
+    data.house = request.POST.get('house')
+    data.street = request.POST.get('street')
+    data.city = request.POST.get('city')
+    data.state = request.POST.get('state')
+    data.pincode = request.POST.get('pincode')
+    branch_id = request.POST.get('branch')
+    branch_instance = branch.objects.get(branch_id=branch_id)
+    data.branch_id = branch_instance
+    course_id = request.POST.get('course')
+    course_instance = course.objects.get(course_id=course_id)
+    data.course_id = course_instance
+    data.save()
+    data3=student.objects.last()
+    request.session['std']=data3.student_id
+    return redirect('/attendtest/')
 ## ---------- Admin -----------
 
 
@@ -104,6 +128,201 @@ def eligibility_post(request):
 def view_eligibility(request):
     data = eligibility.objects.all()
     return render(request, 'Admin/view_elig_quest.html', {'data': data})
+
+def attendtest(request):
+    data = eligibility.objects.all()
+    return render(request, 'Admin/attendtest.html', {'data': data})
+
+def option1(request,opid,qid):
+    data = eligibility.objects.get(question_id=qid)
+    
+    if 'test1_id' not in request.session:
+        
+        print(data.option1)
+        print(data.answer)
+        if data.option1==data.answer:
+            
+                        data2=Result()
+                        data2.STUDENT_id=request.session['std']
+                        data2.impression=1
+                        data2.status="active"
+                        data2.date=datetime.datetime.now().strftime ("%Y-%m-%d")
+                        data2.time= datetime.datetime.now().strftime('%H:%M:%S')
+                        data2.save()
+                        data3=Result.objects.last()
+                        print(data3.test_id)
+                        
+                        request.session['test1_id']=data3.test_id
+    else:
+        
+        if data.option1==data.answer:
+                    
+                    result_id=request.session['test1_id'] 
+                    
+                    data2=Result.objects.get(test_id=result_id)
+                    data2.impression=int(data2.impression)+1
+                    
+                    data2.save()               
+            
+    data.status="Attended"
+    data.save()
+    
+    data=eligibility.objects.filter(status="Not Attended")
+    return render(request,"Admin/attendtest.html",{'data':data})
+
+def option2(request,opid,qid):
+    data = eligibility.objects.get(question_id=qid)
+    if 'test1_id' not in request.session:
+        if data.option2==data.answer:
+            
+                        data2=Result()
+                        
+                        data2.STUDENT_id=request.session['std']
+                        data2.impression=1
+                        data2.status="active"
+                        data2.date=datetime.datetime.now().strftime ("%Y-%m-%d")
+                        data2.time= datetime.datetime.now().strftime('%H:%M:%S')
+                        data2.save()
+                        data3=Result.objects.last()
+                        print(data3.test_id)
+                        
+                        request.session['test1_id']=data3.test_id
+    else:
+        if data.option2==data.answer:
+                    result_id=request.session['test1_id'] 
+                    
+                    
+                    
+                    
+                    data2=Result.objects.get(test_id=result_id)
+                    data2.impression=int(data2.impression)+1
+                    
+                    data2.save()         
+                    
+    data.status="Attended"
+    data.save()
+    
+    data=eligibility.objects.filter(status="Not Attended")
+    return render(request,"Admin/attendtest.html",{'data':data})
+
+def option3(request,opid,qid):
+    data = eligibility.objects.get(question_id=qid)
+    if 'test1_id' not in request.session:
+        if data.option3==data.answer:
+            
+                        data2=Result()
+                        
+                        data2.STUDENT_id=request.session['std']
+                        data2.impression=1
+                        data2.status="active"
+                        data2.date=datetime.datetime.now().strftime ("%Y-%m-%d")
+                        data2.time= datetime.datetime.now().strftime('%H:%M:%S')
+                        data2.save()
+                        data3=Result.objects.last()
+                        print(data3.test_id)
+                        
+                        request.session['test1_id']=data3.test_id
+    else:
+        if data.option3==data.answer:
+                    result_id=request.session['test1_id'] 
+                    
+                    
+                    
+                    
+                    data2=Result.objects.get(test_id=result_id)
+                    data2.impression=int(data2.impression)+1
+                    
+                    data2.save()                        
+    data.status="Attended"
+    data.save()
+    
+    data=eligibility.objects.filter(status="Not Attended")
+    return render(request,"Admin/attendtest.html",{'data':data})
+
+
+def option4(request,opid,qid):
+    data = eligibility.objects.get(question_id=qid)
+    if 'test1_id' not in request.session:
+        if data.option4==data.answer:
+            
+                        data2=Result()
+                        
+                        data2.STUDENT_id=request.session['std']
+                        data2.impression=1
+                        data2.status="active"
+                        data2.date=datetime.datetime.now().strftime ("%Y-%m-%d")
+                        data2.time= datetime.datetime.now().strftime('%H:%M:%S')
+                        data2.save()
+                        data3=Result.objects.last()
+                        print(data3.test_id)
+                        
+                        request.session['test1_id']=data3.test_id
+    else:
+        if data.option4==data.answer:
+                    print(request.session['test1_id'] )
+                    result_id=request.session['test1_id'] 
+                    
+                    
+                    
+                    
+                    data2=Result.objects.get(test_id=result_id)
+                    data2.impression=int(data2.impression)+1
+                    
+                    data2.save()                       
+    data.status="Attended"
+    data.save()
+    
+    data=eligibility.objects.filter(status="Not Attended")
+    return render(request,"Admin/attendtest.html",{'data':data})
+
+def finishexam(request):
+        
+        if 'test1_id' not in request.session:
+            data2=eligibility.objects.all()
+            for x in data2:
+                x.status="Not Attended"
+                x.save()
+            return render(request,"Admin/result11.html")
+        else:
+            
+            resultid=request.session['test1_id'] 
+        
+            data=Result.objects.get(test_id=resultid)
+            data.status="completed"
+            data.save()
+            data2=eligibility.objects.all()
+            for x in data2:
+                x.status="Not Attended"
+                x.save()
+
+
+            
+            ss=request.session['test1_id']      
+            del request.session['test1_id']   
+            
+
+            data7=Result.objects.get(test_id=ss)
+            
+        if int(data7.impression)>=6:
+            return redirect('/eligible/')
+        else:
+            var = student.objects.get(student_id=request.session['std'])
+            var.delete()
+            return HttpResponse('''<script>alert('Sorry!! You are not eligible to join the course as you have not secured the minimum mark');window.location="/login/"</script>''')
+            
+            
+        
+def eligible(request):
+    data = Result.objects.get(STUDENT_id=request.session['std'])
+    return render(request,"eligible.html",{'data':data})
+
+def not_eligible(request):
+    return render(request,"not_eligible.html") 
+
+def eligibility_test(request):
+    data = eligibility.objects.all()
+    return render(request, 'eligibility_test.html', {'data': data})
+
 
 def add_course(request):
     return render(request,'Admin/add_course.html')
@@ -315,34 +534,34 @@ def view_fees(request):
 def branch_home(request):
     return render(request,'Branch/branch_home.html')
 
-def add_student(request):
-    data = batch.objects.all()
-    return render(request, 'Branch/add_student.html', {'data': data})
+# def add_student(request):
+#     data = batch.objects.all()
+#     return render(request, 'Branch/add_student.html', {'data': data})
 
-def add_student_post(request):
-    from datetime import datetime
+# def add_student_post(request):
+    # from datetime import datetime
     
-    data = student()
-    data.student_name = request.POST.get('student_name')
-    data.dob2 = request.POST.get('dob')
-    if data.dob2 > str(datetime.now().date()):
-        return HttpResponse('Invalid Date of Birth')
-    data.email = request.POST.get('email')
-    data.phone = request.POST.get('phone')
-    data.qualification= request.POST.get('qualification')
-    data.house = request.POST.get('house')
-    data.city = request.POST.get('city')
-    data.state = request.POST.get('state')
-    data.pincode = request.POST.get('pincode')
-    student_image=request.FILES['student_image']
+    # data = student()
+    # data.student_name = request.POST.get('student_name')
+    # data.dob2 = request.POST.get('dob')
+    # if data.dob2 > str(datetime.now().date()):
+    #     return HttpResponse('Invalid Date of Birth')
+    # data.email = request.POST.get('email')
+    # data.phone = request.POST.get('phone')
+    # data.qualification= request.POST.get('qualification')
+    # data.house = request.POST.get('house')
+    # data.city = request.POST.get('city')
+    # data.state = request.POST.get('state')
+    # data.pincode = request.POST.get('pincode')
+    # student_image=request.FILES['student_image']
     
-    fs=FileSystemStorage()
-    filename=fs.save(student_image.name,student_image)
-    uploaded_file_url1 = fs.url(filename)
-    data.student_image=uploaded_file_url1
-    data.batch_id_id = request.POST.get('batch_name')
-    data.save()
-    return render(request, 'Branch/add_student.html')
+    # fs=FileSystemStorage()
+    # filename=fs.save(student_image.name,student_image)
+    # uploaded_file_url1 = fs.url(filename)
+    # data.student_image=uploaded_file_url1
+    # data.batch_id_id = request.POST.get('batch_name')
+    # data.save()
+    # return render(request, 'Branch/add_student.html')
 
 def view_student(request):
     data = student.objects.all()

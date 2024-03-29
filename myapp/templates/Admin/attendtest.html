@@ -1,0 +1,111 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #f2f2f2;
+            }
+
+            .content {
+                margin: 20px;
+            }
+
+            .container {
+                max-width: 800px;
+                margin: 0 auto;
+                background-color: #fff;
+                padding: 20px;
+                border-radius: 5px;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            }
+
+            h2 {
+                margin-top: 0;
+            }
+
+            .card {
+                margin-bottom: 20px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            }
+
+            .card-header {
+                background-color: #f2f2f2;
+                padding: 10px;
+                font-weight: bold;
+            }
+
+            .card-body {
+                padding: 10px;
+            }
+
+            .card-body a {
+                text-decoration: none;
+            }
+
+            .card-body button {
+                padding: 5px 10px;
+                border: none;
+                background-color: #007bff;
+                color: #fff;
+                cursor: pointer;
+                border-radius: 3px;
+            }
+
+            .card-body button:hover {
+                background-color: #0056b3;
+            }
+
+            .finish-button {
+                display: flex;
+                justify-content: flex-end;
+                margin-top: 20px;
+            }
+
+            .finish-button button {
+                padding: 10px 20px;
+                background-color: #007bff;
+                color: #fff;
+                border: none;
+                border-radius: 3px;
+                cursor: pointer;
+            }
+
+            .finish-button button:hover {
+                background-color: #0056b3;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="content">
+            <div class="container">
+                <h2>Take your test</h2>
+
+                {% for ct in data %}
+                <div class="card">
+                    <div class="card-header">{{ct.question}}</div>
+                    <div class="card-body">
+                        <a href="/option1/{{ct.option1}}/{{ct.question_id}}"><button>{{ct.option1}}</button></a>
+                        <a href="/option2/{{ct.option2}}/{{ct.question_id}}"><button>{{ct.option2}}</button></a>
+                        <a href="/option3/{{ct.option3}}/{{ct.question_id}}"><button>{{ct.option3}}</button></a>
+                        <a href="/option4/{{ct.option4}}/{{ct.question_id}}"><button>{{ct.option4}}</button></a>
+                    </div>
+                </div>
+                {% endfor %}
+
+                <div class="finish-button">
+                    <a href="/finishexam/"><button>Finish Test</button></a>
+                </div>
+            </div>
+        </div>
+
+        <script src="{% static 'question/js/jquery-3.3.1.min.js' %}"></script>
+        <script src="{% static 'question/js/popper.min.js' %}"></script>
+        <script src="{% static 'question/js/bootstrap.min.js' %}"></script>
+        <script src="{% static 'question/js/main.js' %}"></script>
+    </body>
+</html>
