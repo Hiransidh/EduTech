@@ -1,0 +1,98 @@
+{% extends 'Mentor/mentor_home.html' %}
+{% block x %}
+
+<body>
+    <style>
+        .glassmorphic-card {
+            background: rgba(41, 151, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.125);
+            padding: 20px;
+            width: 50%;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-control {
+            background: rgba(255, 255, 255);
+            border: 1px solid rgba(255, 255, 255, 0.125);
+            border-radius: 10px;
+            padding: 10px;
+            width: 100%;
+        }
+
+        label {
+            color: rgb(0, 0, 0);
+            font-size: 20px;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+
+        .btn-primary {
+            background: #f96d00;
+            border: 1px solid #f96d00;
+            border-radius: 10px;
+            padding: 10px 20px;
+            font-size: 20px;
+            font-weight: 500;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            background: #f96d00;
+            border: 1px solid #f96d00;
+            border-radius: 10px;
+        }
+    </style>
+
+    <div class="card glassmorphic-card">
+        <div class="card-body">
+            <form action="/add_student_post/#mysec" method="post">
+                {% csrf_token %}
+
+                <div class="form-group">
+                    <label>Course</label>
+                    <select class="form-control" name="course" id="course-select">
+                        <option value="">Select Course</option>
+                        {% for i in data %}
+                        <option value="{{ i.course_id }}">{{ i.course_name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Batch</label>
+                    <select class="form-control" name="batch" id="batch-select">
+                        <option value="">Select Batch</option>
+                        
+                        {% for i in data1 %}
+                        <option value="{{i.batch_id}}">{{i.batch_name}}</option>
+                        {% endfor %}
+                            
+                       
+                    </select>
+                </div>
+                <div class="form-group"></div>
+                    <label for="students">Students:</label>
+                    <div class="checkbox-group">
+                        {% for i in data1 %}
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="{{ i.student_id }}" name="students" value="{{ i.id }}">
+                            <label class="form-check-labe">{{ i.student_name }}</label>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Add Students</button>
+            </form>
+        </div>
+    </div>
+
+</body>
+
+{% endblock %}

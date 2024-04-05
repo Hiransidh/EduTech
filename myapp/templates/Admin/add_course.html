@@ -60,10 +60,11 @@
 
   <form action="/add_course_post/" method="post">
     {% csrf_token %}
-    <!-- <div class="form-group">
-      <label for="courseId">Course ID</label>
-      <input type="text" class="form-control" id="courseId" name="course_id" placeholder="Enter course ID" required>
-    </div> -->
+    <div class="form-group">
+      <label >Image</label>
+      <input type="file" class="form-control" name="image" required>
+    </div>
+    
     <div class="form-group">
       <label for="courseName">Course Name</label>
       <input type="text" class="form-control" id="courseName" name="course_name" placeholder="Enter course name"

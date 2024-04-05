@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Payment Page</title>
+    <style>
+        /* CSS styles go here */
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        h3 {
+            color: #666;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        label {
+            display: inline-block;
+            width: 150px;
+            margin-bottom: 5px;
+            text-align: right;
+        }
+
+        input[type="text"] {
+            width: 200px;
+            padding: 5px;
+            margin-bottom: 10px;
+        }
+
+        input[type="submit"] {
+            padding: 10px 20px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #666;
+        }
+    </style>
+</head>
+<body>
+    <h1>Payment Page</h1>
+    <h3>Total Amount: <span>{{ data.amount }}</span></h3>
+
+    <form action="/process_payment/" method="POST">
+        {% csrf_token %}
+
+        <label for="first_instalment">First Instalment:</label>
+        <input type="text" id="first_instalment" name="amount" value="{{ data.payment_per_month|floatformat }}" readonly required>
+
+        <br>
+        <label for="card_number">Card Number:</label>
+        <input type="text" id="card_number" name="card_number" required>
+        <br>
+        <label for="expiry_date">Expiry Date:</label>
+        <select id="expiry_month" name="exp_month" required>
+            <option value="">Month</option>
+            <option value="01">01</option>
+            <option value="02">02</option>
+            <option value="03">03</option>
+            <option value="04">04</option>
+            <option value="05">05</option>
+            <option value="06">06</option>
+            <option value="07">07</option>
+            <option value="08">08</option>
+            <option value="09">09</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+        </select>
+        <select id="expiry_year" name="exp_year" required>
+            <option value="">Year</option>
+            <option value="22">22</option>
+            <option value="23">23</option>
+            <option value="24">24</option>
+            <option value="25">25</option>
+            <option value="26">26</option>
+            <option value="27">27</option>
+            <option value="28">28</option>
+            <option value="29">29</option>
+            <option value="30">30</option>
+            <option value="31">31</option>
+        </select>
+        <br>
+        <label for="cvv">CVV:</label>
+        <input type="text" id="cvv" name="cvv" required>
+        <br>
+        <input type="submit" value="Pay">
+    </form>
+</body>
+</html>

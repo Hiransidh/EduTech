@@ -1,14 +1,15 @@
 from django.shortcuts import render, redirect,HttpResponse
 from myapp.models import *
 from datetime import datetime
-import datetime
 
 from django.core.files.storage import FileSystemStorage
 # Create your views here.
 
 
 def login1(request):
-    return render(request, 'login.html')
+    data = branch.objects.all()
+    data2 = fee.objects.all()
+    return render(request, 'login.html',{'data':data,'data2':data2})
 
 def login_post(request):
     if request.method =='POST':
@@ -105,6 +106,48 @@ def student_reg_post(request):
     data3=student.objects.last()
     request.session['std']=data3.student_id
     return redirect('/attendtest/')
+
+def payment1(request):
+    data=student.objects.get(student_id=request.session['std'])
+    data2=fee.objects.get(course_id_id=data.course_id_id)
+    return render(request, 'payment.html', {'data': data2})  
+
+
+from datetime import datetime
+
+def process_payment(request):
+    data = payment()
+    var = student.objects.get(student_id=request.session['std'])
+    data.student_id_id = var.student_id
+    
+    data3 = fee.objects.get(course_id_id=data.student_id.course_id_id)
+    
+    data2 = bank.objects.get(bank_id=1)
+    if data2.card_number == request.POST.get('card_number') and data2.cvv == request.POST.get('cvv') and data2.exp_month == request.POST.get('exp_month') and data2.exp_year == request.POST.get('exp_year'):
+        
+        if data2.amount>=float(request.POST.get('amount')):
+            data.paid_amount = request.POST.get('amount')
+            data.payment_date = datetime.now()
+            data.remaining_amount = data3.amount - float(request.POST.get('amount'))
+            data.save()
+        else:
+            return HttpResponse('''<script>alert('Insufficient Balance');window.location="/login/"</script>''')
+    
+    else:
+        return HttpResponse('''<script>alert('Invalid Card Details');window.location="/login/"</script>''')
+    
+    data2.amount = data2.amount - float(request.POST.get('amount'))
+    data2.save()
+    lo= login()
+    lo.email = var.email
+    lo.password = var.phone
+    lo.category = 'Student'
+    lo.save()
+    
+    return HttpResponse('''<script>alert('Payment Successfull');window.location="/login/"</script>''')
+    
+
+
 ## ---------- Admin -----------
 
 
@@ -122,6 +165,7 @@ def eligibility_post(request):
     data.option2 = request.POST.get('option2')
     data.option3 = request.POST.get('option3')
     data.option4 = request.POST.get('option4')
+    
     data.save()
     return render(request, 'Admin/eligibility.html')
 
@@ -133,6 +177,8 @@ def attendtest(request):
     data = eligibility.objects.all()
     return render(request, 'Admin/attendtest.html', {'data': data})
 
+
+from datetime import datetime
 def option1(request,opid,qid):
     data = eligibility.objects.get(question_id=qid)
     
@@ -146,8 +192,8 @@ def option1(request,opid,qid):
                         data2.STUDENT_id=request.session['std']
                         data2.impression=1
                         data2.status="active"
-                        data2.date=datetime.datetime.now().strftime ("%Y-%m-%d")
-                        data2.time= datetime.datetime.now().strftime('%H:%M:%S')
+                        data2.date=datetime.now().strftime ("%Y-%m-%d")
+                        data2.time= datetime.now().strftime('%H:%M:%S')
                         data2.save()
                         data3=Result.objects.last()
                         print(data3.test_id)
@@ -156,7 +202,7 @@ def option1(request,opid,qid):
     else:
         
         if data.option1==data.answer:
-                    
+                    print(request.session['test1_id'] )
                     result_id=request.session['test1_id'] 
                     
                     data2=Result.objects.get(test_id=result_id)
@@ -170,6 +216,7 @@ def option1(request,opid,qid):
     data=eligibility.objects.filter(status="Not Attended")
     return render(request,"Admin/attendtest.html",{'data':data})
 
+from datetime import datetime
 def option2(request,opid,qid):
     data = eligibility.objects.get(question_id=qid)
     if 'test1_id' not in request.session:
@@ -180,8 +227,8 @@ def option2(request,opid,qid):
                         data2.STUDENT_id=request.session['std']
                         data2.impression=1
                         data2.status="active"
-                        data2.date=datetime.datetime.now().strftime ("%Y-%m-%d")
-                        data2.time= datetime.datetime.now().strftime('%H:%M:%S')
+                        data2.date=datetime.now().strftime ("%Y-%m-%d")
+                        data2.time= datetime.now().strftime('%H:%M:%S')
                         data2.save()
                         data3=Result.objects.last()
                         print(data3.test_id)
@@ -205,6 +252,8 @@ def option2(request,opid,qid):
     data=eligibility.objects.filter(status="Not Attended")
     return render(request,"Admin/attendtest.html",{'data':data})
 
+
+from datetime import datetime
 def option3(request,opid,qid):
     data = eligibility.objects.get(question_id=qid)
     if 'test1_id' not in request.session:
@@ -215,8 +264,8 @@ def option3(request,opid,qid):
                         data2.STUDENT_id=request.session['std']
                         data2.impression=1
                         data2.status="active"
-                        data2.date=datetime.datetime.now().strftime ("%Y-%m-%d")
-                        data2.time= datetime.datetime.now().strftime('%H:%M:%S')
+                        data2.date=datetime.now().strftime ("%Y-%m-%d")
+                        data2.time= datetime.now().strftime('%H:%M:%S')
                         data2.save()
                         data3=Result.objects.last()
                         print(data3.test_id)
@@ -239,7 +288,7 @@ def option3(request,opid,qid):
     data=eligibility.objects.filter(status="Not Attended")
     return render(request,"Admin/attendtest.html",{'data':data})
 
-
+from datetime import datetime
 def option4(request,opid,qid):
     data = eligibility.objects.get(question_id=qid)
     if 'test1_id' not in request.session:
@@ -250,8 +299,8 @@ def option4(request,opid,qid):
                         data2.STUDENT_id=request.session['std']
                         data2.impression=1
                         data2.status="active"
-                        data2.date=datetime.datetime.now().strftime ("%Y-%m-%d")
-                        data2.time= datetime.datetime.now().strftime('%H:%M:%S')
+                        data2.date=datetime.now().strftime ("%Y-%m-%d")
+                        data2.time= datetime.now().strftime('%H:%M:%S')
                         data2.save()
                         data3=Result.objects.last()
                         print(data3.test_id)
@@ -341,6 +390,7 @@ def add_course_post(request):
     if request.method == 'POST':
         data = course()
         data.course_id = request.POST.get('course_id')
+        data.image = request.POST.get('image')
         data.course_name = request.POST.get('course_name')
         data.description = request.POST.get('description')
         data.course_duration = request.POST.get('course_duration')
@@ -408,6 +458,7 @@ def add_branch(request):
 def add_branch_post(request):
     data = branch()
     data.branch_id = request.POST.get('branch_id')
+    data.branch_image = request.FILES['branch_image']
     data.branch_name = request.POST.get('branch_name')
     data.location = request.POST.get('location')
     data.email = request.POST.get('email')
@@ -418,6 +469,10 @@ def add_branch_post(request):
 def view_branch(request):
     data = branch.objects.all()
     return render(request, 'Admin/view_branch.html', {'data': data})
+
+def view_branch2(request,id):
+    data = branch.objects.get(branch_id=id)
+    return render(request, 'Admin/view_branch2.html', {'data': data})
 
 def edit_branch(request,id):
     data = branch.objects.get(branch_id=id)
@@ -531,49 +586,20 @@ def view_fees(request):
     
     
 # ------BRANCH--------
+
 def branch_home(request):
     return render(request,'Branch/branch_home.html')
 
-# def add_student(request):
-#     data = batch.objects.all()
-#     return render(request, 'Branch/add_student.html', {'data': data})
 
-# def add_student_post(request):
-    # from datetime import datetime
-    
-    # data = student()
-    # data.student_name = request.POST.get('student_name')
-    # data.dob2 = request.POST.get('dob')
-    # if data.dob2 > str(datetime.now().date()):
-    #     return HttpResponse('Invalid Date of Birth')
-    # data.email = request.POST.get('email')
-    # data.phone = request.POST.get('phone')
-    # data.qualification= request.POST.get('qualification')
-    # data.house = request.POST.get('house')
-    # data.city = request.POST.get('city')
-    # data.state = request.POST.get('state')
-    # data.pincode = request.POST.get('pincode')
-    # student_image=request.FILES['student_image']
-    
-    # fs=FileSystemStorage()
-    # filename=fs.save(student_image.name,student_image)
-    # uploaded_file_url1 = fs.url(filename)
-    # data.student_image=uploaded_file_url1
-    # data.batch_id_id = request.POST.get('batch_name')
-    # data.save()
-    # return render(request, 'Branch/add_student.html')
-
-def view_student(request):
-    data = student.objects.all()
-    return render(request, 'Branch/view_student.html', {'data': data})
+def view_branch_student(request):
+    val = request.session['Branch Staff']
+    data = staff.objects.get(email=val)
+    data1 = student.objects.filter(branch_id=data.branch_id)
+    return render(request, 'Branch/view_student.html', {'data': data1})
 
 def view_student2(request,id):
-    data =student.objects.get(student_id=id)
+    data = student.objects.get(student_id=id)
     return render(request, 'Branch/view_student2.html', {'data': data})
-
-def view_staff1(request):
-    data = staff.objects.all()
-    return render(request, 'Branch/view_staff.html', {'data': data})
 
 def view_fee1(request):
     data = batch.objects.all()
@@ -585,10 +611,25 @@ def view_fee2(request,id):
     return render(request, 'Branch/view_classfee.html', {'data': data})
 
 
+
+def branch_profile(request):
+    branch_staff = staff.objects.get(email=request.session['Branch Staff'])
+    branch = branch_staff.branch_id
+    return render(request, 'Branch/profile.html', {'branch': branch})
+
+def view_branch_staffs(request):
+    branch_staff = staff.objects.get(email=request.session['Branch Staff'])
+    data = staff.objects.filter(branch_id=branch_staff.branch_id)
+    return render(request, 'Branch/view_staffs.html', {'data': data})
+
 # ------- Course Coordinator --------
 
 def coordinator_home(request):
     return render(request, 'Coordinator/coordinator_home.html')
+
+def view_cc_profile(request):
+    cc = staff.objects.get(email=request.session['Course Coordinator'])
+    return render(request, 'Coordinator/view_profile.html', {'cc': cc})
 
 def add_class(request):
     data = course.objects.all()
@@ -615,43 +656,97 @@ def view_class(request):
     data = batch.objects.all()
     return render(request, 'Coordinator/view_class.html', {'data': data})
 
+# def add_student(request):
+#     data3 = course.objects.all()
+#     data = batch.objects.fi
 
+#     return render(request,'Coordinator/add_student.html',{'data3':data3,'data':data})
 
-
-
+def add_student(request):
+    data = course.objects.all()
+    var = request.POST.get('course')
+    data1 = batch.objects.filter(course_id=var)
+    return render(request, 'Coordinator/add_student.html', {'data': data, 'data1': data1})
 # ------MENTOR--------
 
 def mentor_home(request):
     return render(request, 'Mentor/mentor_home.html')
 
 def add_timetable(request):
-    data1 = batch.objects.all()
-    data2=staff.objects.filter(staff_type='teacher')
-    data3 = Subject.objects.all()
-    return render(request, 'Mentor/add_timetable.html', {'data1': data1, 'data2':data2,'data3':data3})
+  
+    data5= staff.objects.get(email=request.session['Mentor']).branch_id
+    data2= staff.objects.filter(staff_type='teacher',branch_id=data5)
+    data1= staff.objects.get(email=request.session['Mentor']).staff_id
+    data = batch.objects.get(staff_id=data1)
+    data3 = batch.objects.get(staff_id=data1)
+    data4 = Subject.objects.filter(course=data3.course_id)
+    return render(request, 'Mentor/add_timetable.html', {'data2': data2, 'data4': data4, 'data': data})
     
 def add_timetable_post(request):
     data = timetable()
     data.batch_id_id = request.POST.get('batch')
-    data.staff_id_id = request.POST.get('teacher')
-    data.subject_id_id = request.POST.get('subject')
     data.day = request.POST.get('day')
-    data.start_time = request.POST.get('start_time')
-    data.end_time = request.POST.get('end_time')
+    data.period1 = request.POST.get('period_1')
+    data.period2 = request.POST.get('period_2')
+    data.period3 = request.POST.get('period_3')
+    data.period4 = request.POST.get('period_4')
+    data.period5 = request.POST.get('period_5')
+    
     data.save()
     return render(request, 'Mentor/add_timetable.html')
 
 def view_timetable(request):
     data = timetable.objects.all()
     return render(request, 'Mentor/view_timetable.html', {'data': data})
+
+def edit_timetable(request,id):
+    data = timetable.objects.get(timetable_id=id)
+    data1= staff.objects.get(email=request.session['Mentor']).staff_id
+    data3 = batch.objects.get(staff_id=data1)
+    data4 = Subject.objects.filter(course=data3.course_id)
+    
+    return render(request, 'Mentor/edit_timetable.html', {'data': data, 'data4': data4,})
+    
+def edit_timetable_post(request):
+    id = request.POST.get('batch')
+    data = timetable.objects.get(timetable_id=id)
+    data.day = request.POST.get('day')
+    data.period1 = request.POST.get('period_1')
+    data.period2 = request.POST.get('period_2')
+    data.period3 = request.POST.get('period_3')
+    data.period4 = request.POST.get('period_4')
+    data.period5 = request.POST.get('period_5')
+    data.save()
+    return redirect('/view_timetable/')
+    
     
 # ------TEACHER--------
 
 def teacher_home(request):
     return render(request, 'Teacher/teacher_home.html')
+
+def add_notes(request):
+    data = staff.objects.get(email=request.session['Teacher'])
+    data2 = course.objects.all()
+    return render(request, 'Teacher/add_notes.html', {'data': data, 'data2': data2})
+
+def add_notes_post(request):
+    data = notes()
+    data.staff_id_id = request.POST.get('staff')
+    data.course_id_id = request.POST.get('course')
+    data.name = request.POST.get('name')
+    data.notes = request.FILES['note']
+    data.date = datetime.now()
+    
+    data.save()
+    return render(request, 'Teacher/add_notes.html')
     
 
 # ------STUDENT--------
+
+def student_home(request):
+    data = student.objects.get(email=request.session['Student'])
+    return render(request, 'Student/student_home.html', {'data': data})
 
 def send_complaint(request):
     return render(request, 'Student/send_complaint.html')

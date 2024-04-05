@@ -32,55 +32,21 @@
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
         <div class="container">
             <a class="navbar-brand" href="index.html"><span>Edu</span>Tech</a>
-            <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
        <span class="oi oi-menu"></span> Menu
    </button>
 
-<div class="collapse navbar-collapse" id="ftco-nav">
-    <ul class="navbar-nav ml-auto">
-        <li class="nav-item active"><a href="index.html" class="nav-link">Home</a></li>
-        <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="branchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Branch
-            </a>
-            <div class="dropdown-menu" aria-labelledby="branchDropdown">
-                <a class="dropdown-item" href="about.html">Add Branch</a>
-                <a class="dropdown-item" href="about.html">View Branch</a>
-            </div>
-        </li>
-        <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="courseDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Course
-            </a>
-            <div class="dropdown-menu" aria-labelledby="courseDropdown">
-                <a class="dropdown-item" href="course1.html">Add Course</a>
-                <a class="dropdown-item" href="course2.html">View Course</a>
-            </div>
-        </li>
-        <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="feeDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Fee
-            </a>
-            <div class="dropdown-menu" aria-labelledby="feeDropdown">
-                <a class="dropdown-item" href="about.html">Set Fee</a>
-                <a class="dropdown-item" href="about.html">View Fee</a>
-            </div>
-        </li>
-        <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="staffDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Staff
-            </a>
-            <div class="dropdown-menu" aria-labelledby="staffDropdown">
-                <a class="dropdown-item" href="staff1.html">Add Staff</a>
-                <a class="dropdown-item" href="staff2.html">View Staff</a>
-            </div>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="blog.html">Report</a>
-        </li>
-        <li class="nav-item"><a href="#" class="nav-link">Complaint</a></li>
+<div class="collapse navbar-collapse justify-content-end" id="ftco-nav">
+    <ul class="navbar-nav ml">
+        <li class="nav-item"><a href="#branch" class="nav-link">Branches</a></li>
     </ul>
-</div> -->
+    <ul class="navbar-nav ml">
+        <li class="nav-item"><a href="#course" class="nav-link">Courses</a></li>
+    </ul>
+    <ul class="navbar-nav ml">
+        <li class="nav-item"><a href="#" class="nav-link">Enquire</a></li>
+    </ul>
+</div>
         </div>
         </div>
     </nav>
@@ -146,6 +112,71 @@
         </section>
 
 
+        <section class="ftco-section bg-light" id="branch">
+            <div class="container">
+                <div class="row justify-content-center pb-4">
+                    <div class="col-md-12 heading-section text-center ftco-animate">
+                        
+                        <h2 class="mb-4">Branches</h2>
+                    </div>
+                </div>
+                <div class="row d-flex">
+                    
+                    {% for i in data  %}
+                        
+                    <div class="col-lg-4 ftco-animate">
+                        <div class="blog-entry">
+                            <img src="{{i.branch_image.url}}" class="block-20">
+                            <div class="text d-block">
+                                
+                                <h3 class="heading">{{i.branch_name}}</a></h3>
+                                <p>{{i.location}}</p>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    
+                    
+                </div>
+            </div>
+        </section>
+
+        <section class="ftco-section bg-light" id="course">
+            <div class="container">
+                <div class="row justify-content-center pb-4">
+                    <div class="col-md-12 heading-section text-center ftco-animate">
+                       
+                        <h2 class="mb-4">Courses</h2>
+                    </div>
+                </div>
+                <div class="row">
+                    {% for i in data2 %}
+                    <div class="col-md-4 ftco-animate">
+                        
+                        
+                            
+                            
+                        <div class="project-wrap">
+                            <img src="{{i.course_id.image.url}}" class="block-20">
+                               
+                            </a>
+                            <div class="text p-4">
+                                <h3>{{i.course_id.course_name}}</h3>
+                                <br>
+                                <ul class="d-flex justify-content-between">
+                                    <li><span class="flaticon-shower">Fee</span></li>
+                                    <li class="price">₹{{i.amount}}</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+    
     <footer class="ftco-footer ftco-no-pt">
         <div class="container">
             <div class="row mb-5">
@@ -240,9 +271,9 @@
     <script src="{% static 'js/jquery.animateNumber.min.js' %}"></script>
     <script src="{% static 'js/bootstrap-datepicker.js' %}"></script>
     <script src="{% static 'js/scrollax.min.js' %}"></script>
-    <script
+    <!-- <script
         src="{% static 'https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false' %}"></script>
-    <script src="{% static 'js/google-map.js' %}"></script>
+    <script src="{% static 'js/google-map.js' %}"></script> -->
     <script src="{% static 'js/main.js' %}"></script>
 
 </body>

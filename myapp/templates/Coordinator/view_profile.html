@@ -1,0 +1,18 @@
+{% extends 'Coordinator/coordinator_home.html'%}
+{% block x %}
+<div>
+    <h1>Staff Profile</h1>
+    <div>
+        <h2>Name:</h2>
+        <p>{{cc.staff_name}}</p>
+    </div>
+    <div>
+        <h2>Phone:</h2>
+        <p>{{cc.phone}}</p>
+    </div>
+    <div>
+        <h2>Email:</h2>
+        <p>{{cc.email}}</p>
+    </div>
+</div>
+{% endblock x %}

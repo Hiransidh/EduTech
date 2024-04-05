@@ -4,17 +4,17 @@
 {% for i in data %}
 <div class="col-md-3 ftco-animate">
     <div class="project-wrap container-sm">
-        <img src="{{i.student_image}}" alt="{{i.student_name}}"
+        <img src="{{i.student_image.url}}" alt="{{i.student_name}}"
             style="width: 200px; height: 200px; object-fit: cover; object-position: center;">
             
 
         <div class="text p-4">
             <h3><a href="/view_student2/{{ i.student_id }}#mysec">{{i.student_name}}</a></h3>
             <!-- <p class="advisor"><span>{{i.student_name}}</span></p> -->
-            <p class="advisor">{{i.description}}</p>
+            
             <ul class="d-flex justify-content-between">
                 
-                <li class="price">{{i.batch_id.course_id.course_name}}</li>
+                <li class="price">{{i.course_id.course_name}}</li>
             </ul>
             <ul class="d-flex justify-content-between">
                 <li><span class="flaticon-shower"></span>Contact</li>

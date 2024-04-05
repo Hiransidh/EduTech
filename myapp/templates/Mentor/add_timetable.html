@@ -11,14 +11,14 @@
             border-radius: 10px;
             border: 1px solid rgba(255, 255, 255, 0.125);
             padding: 20px;
-            width: 50%; 
+            width: 50%;
             margin: 0 auto;
         }
-    
+
         .form-group {
             margin-bottom: 20px;
         }
-    
+
         .form-control {
             background: rgba(255, 255, 255);
             border: 1px solid rgba(255, 255, 255, 0.125);
@@ -26,14 +26,14 @@
             padding: 10px;
             width: 100%;
         }
-    
+
         label {
             color: rgb(0, 0, 0);
             font-size: 20px;
             font-weight: 500;
             margin-bottom: 10px;
         }
-    
+
         .btn-primary {
             background: #f96d00;
             border: 1px solid #f96d00;
@@ -44,7 +44,7 @@
             color: #fff;
             cursor: pointer;
         }
-    
+
         .btn-primary:hover {
             background: #f96d00;
             border: 1px solid #f96d00;
@@ -52,63 +52,95 @@
         }
     </style>
 
-<div class="card glassmorphic-card">
-    <div class="card-body">
+    <div class="card glassmorphic-card">
+        <div class="card-body">
 
-    <form action="/add_timetable_post/#mysec" method="post">
-        {% csrf_token %}
-        <div class="form-group">
-        <label for="batch">Batch</label>
-        <select id="batch" name="batch" class="form-control">
+            <form action="/add_timetable_post/#mysec" method="post">
 
-            {% for i in data1 %}
+                <input type="hidden" name="batch" value="{{data.batch_id}}">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="day">Day:</label>
+                    <select id="day" name="day" class="form-control">
+                        <option value="Monday">Monday</option>
+                        <option value="Tuesday">Tuesday</option>
+                        <option value="Wednesday">Wednesday</option>
+                        <option value="Thursday">Thursday</option>
+                        <option value="Friday">Friday</option>
+                        <option value="Saturday">Saturday</option>
+                        <option value="Sunday">Sunday</option>
+                    </select>
+                </div>
 
-            <option value="{{i.batch_id}}">{{i.batch_name}}</option>
+                <div class="form-group">
+                    <label for="subject">Period 1:</label>
+                    <select id="subject" name="period_1" class="form-control">
 
-            {% endfor %}
+                        {% for i in data4 %}
 
-        </select>
-</div>
-<div class="form-group">
-        <label for="day">Day:</label>
-        <select id="day" name="day" class="form-control">
-            <option value="monday">Monday</option>
-            <option value="tuesday">Tuesday</option>
-            <option value="wednesday">Wednesday</option>
-            <option value="thursday">Thursday</option>
-            <option value="friday">Friday</option>
-            <option value="saturday">Saturday</option>
-            <option value="sunday">Sunday</option>
-        </select>
-</div>
-        
-<div class="form-group">
-        <label for="subject">Subject:</label>
-        <select id="subject" name="subject" class="form-control">
+                        <option value="{{i.name}}">{{i.name}}</option>
 
-            {% for i in data3 %}
-
-            <option value="{{i.id}}">{{i.name}}</option>
-
-            {% endfor %}
+                        {% endfor %}
 
 
-        </select>
-        </div>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="subject">Period 2:</label>
+                    <select id="subject" name="period_2" class="form-control">
 
-        <div class="form-group">
-        <label for="subject">Time:</label>
-        <select id="time" name="time" class="form-control">
-            <option value="time">9.30 am- 11.00 am</option>
-            <option value="time">11.15 am- 12.45 pm</option>
-            <option value="time">1.30 pm- 3.00 pm</option>
-            <option value="time">3.15 pm- 4.45 pm</option>
-            <option value="time">5.00 pm- 6.30 pm</option>
+                        {% for i in data4 %}
 
-        </select>
-        </div>
+                        <option value="{{i.name}}">{{i.name}}</option>
 
-<!-- 
+                        {% endfor %}
+
+
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="subject">Period 3:</label>
+                    <select id="subject" name="period_3" class="form-control">
+
+                        {% for i in data4 %}
+
+                        <option value="{{i.name}}">{{i.name}}</option>
+
+                        {% endfor %}
+
+
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="subject">Period 4:</label>
+                    <select id="subject" name="period_4" class="form-control">
+
+                        {% for i in data4 %}
+
+                        <option value="{{i.name}}">{{i.name}}</option>
+
+                        {% endfor %}
+
+
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="subject">Period 5:</label>
+                    <select id="subject" name="period_5" class="form-control">
+
+                        {% for i in data4 %}
+
+                        <option value="{{i.name}}">{{i.name}}</option>
+
+                        {% endfor %}
+
+
+                    </select>
+                </div>
+
+               
+
+                <!-- 
         <div class="form-group">
 
         <label for="start-time">Start Time:</label>
@@ -120,8 +152,8 @@
         <input type="time" id="end-time" name="end_time" class="form-control">
 
         </div> -->
-        
-<div class="form-group">
+
+                <!-- <div class="form-group">
         <label for="teacher">Teacher:</label>
         <select id="teacher" class="form-control" name="teacher">
 
@@ -132,15 +164,15 @@
             {% endfor %}
 
         </select>
-</div>
+</div> -->
 
 
 
 
-           <button type="submit" class="btn btn-primary">Add</button>
-    </form>
+                <button type="submit" class="btn btn-primary">Add</button>
+            </form>
+        </div>
     </div>
-    </div>
-    </body>
-    
+</body>
+
 {% endblock %}

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  
+    <style>
+        /* Add your CSS styles here */
+        /* For example: */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+        }
+        .branch-details {
+            border: 2px solid #333;
+            padding: 20px;
+            margin: 20px;
+            background-color: #fff;
+            text-align: center; /* Align center */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .branch-details img {
+            max-width: 200px;
+            height: auto;
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+        .branch-details h2 {
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        .branch-details p {
+            color: #666;
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+        .branch-details span {
+            font-weight: bold;
+        }
+        .edit-button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin-top: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="branch-details" style="width: fit-content; margin:10% 43%;" >
+        
+        <img src="{{branch.branch_image.url}}" alt="Branch Image">
+        <h2>{{branch.branch_name}}</h2>
+        <p>Location: <span id="location">{{branch.location}}</span></p>
+        <p>Email: <span id="email">{{branch.email}}</span></p>
+        <p>Phone: <span id="phone">{{branch.phone}}</span></p>
+
+        
+    </div>
+</body>
+</html>

@@ -5,20 +5,16 @@
     <form id="form1" name="form1" method="post" action="">
         <table class="table table-bordered table-hover">
             <tr>
-                <th>Branch ID</th>
+                <th>Sl No</th>
                 <th>Branch Name</th>
-                <th>Branch Location</th>
-                <th>Branch Contact</th>
-                <th>Branch Email</th>
+                
             </tr>
             {% for i in data %}
             <tr>
-                <td>{{ i.branch_id }}</td>
+                <td>{{ forloop.counter }}</td>
                 <td>{{ i.branch_name }}</td>
-                <td>{{ i.location }}</td>
-                <td>{{ i.phone}}</td>
-                <td>{{ i.email }}</td>
-                <td><a href="/view_branch/{{ i.branch_id }}#mysec" class="btn btn-success btn-sm">View</a></td>
+                
+                <td><a href="/view_branch2/{{ i.branch_id }}#mysec" class="btn btn-success btn-sm">View</a></td>
                 <td><a href="/edit_branch/{{ i.branch_id }}#mysec" class="btn btn-primary btn-sm">Edit</a></td>
                 <td><a href="/delete_branch/{{ i.branch_id }}#mysec" class="btn btn-danger btn-sm">Delete</a></td>
             </tr>

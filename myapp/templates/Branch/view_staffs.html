@@ -1,0 +1,32 @@
+{% extends 'Branch/branch_home.html'%}
+{% block x %}
+
+<body>
+  <form id="form1" name="form1" method="post" action="">
+    <table class="table table-bordered table-hover">
+      <tr>
+        <th width="90px">Sl No</th>
+        <th width="120px">Staff Name</th>
+        <th>Staff Email</th>
+        <th>Staff Phone</th>
+        <th>Qualification</th>
+        <th>Staff Address</th>
+        <th>Type</th>
+        
+      </tr>
+      {% for i in data %}
+      <tr>
+        <td>{{ forloop.counter}}</td>
+        <td>{{ i.staff_name }}</td>
+        <td>{{ i.email }}</td>
+        <td>{{ i.phone }}</td>
+        <td>{{ i.qualification }}</td>
+        <td>{{ i.house }}, {{ i.city }}, {{ i.state }},{{ i.pincode }}</td>
+        <td>{{ i.staff_type }}</td>
+        
+      </tr>
+      {% endfor %}
+    </table>
+  </form>
+</body>
+{% endblock x %}

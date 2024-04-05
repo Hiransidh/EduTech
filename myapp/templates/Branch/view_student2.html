@@ -15,4 +15,8 @@
     <p>Address: <span id="student-address">{{data.house}}, {{data.city}}, {{data.state}}, {{data.pincode}}</span></p>
     <p>Batch: <span></span></p>
 </div>
+<div>
+    <img src="{{data.student_image.url}}" alt="{{data.student_name}}"
+        style="width: 200px; height: 200px; object-fit: cover; object-position: center;">
+</div>
 {% endblock x %}

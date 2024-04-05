@@ -1,35 +1,36 @@
 {% extends 'Mentor/mentor_home.html' %}
 {% block x %}
 
-
-{% for i in data1  %}
-
 <h4>{{i.batch_name}}</h4>
 
-<table class="table table-bordered">
+<table class="table table-bordered table-hover">
+    <thead class="thead-dark">
     <tr>
         <th>Day</th>
-        
-        {% for i in data  %}
-            <th>{{i.start_time}}-{{i.end_time}}</th>
-        {% endfor %}
-            
+        <th>Period 1</th>
+        <th>Period 2</th>
+        <th>Period 3</th>
+        <th>Period 4</th>
+        <th>Period 5</th>
+        <th></th>
+
     </tr>
+    </thead>
+    <tbody>
     {% for i in data %}
     <tr>
-        <td>{{i.day}}</td>
-        {% for j in data2 %}
-            {% if j.day == i.day %}
-                {% if j.batch_id == i.batch_id %}
-                    <td>{{j.subject_id.subject_name}}<br>{{j.staff_id.staff_name}}</td>
-                {% endif %}
-            {% endif %}
-        {% endfor %}
+        <td style="font-weight: bold;">{{i.day}}</td>
+        <td>{{i.period1}}</td>
+        <td>{{i.period2}}</td>
+        <td>{{i.period3}}</td>
+        <td>{{i.period4}}</td>
+        <td>{{i.period5}}</td>
+        <td><a href="/edit_timetable/{{i.timetable_id}}#mysec">Edit</a></td>
+
     </tr>
     {% endfor %}
-
-    {% endfor %}
-
+        
+    </tbody>
 </table>
     
-    {% endblock %}
+{% endblock x %}
