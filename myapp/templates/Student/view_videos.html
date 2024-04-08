@@ -1,0 +1,73 @@
+{% extends 'Student/student_home.html' %}
+{% block x %}
+<style>
+    th {
+        text-align: center;
+    }
+    td {
+        text-align: center;
+    }
+</style>
+
+{% if data %}
+    <table class="table table-bordered table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th style="width: 70px;">Sl No</th>
+                <th style="width: 250px;">Video Name</th>
+                <th style="width: 200px;">Link</th>
+                <th style="width: 250px;">Course</th>
+                <th>Faculty</th>
+                <th style="width: 170px;">Date</th>
+            </tr>
+            {% for i in data %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ i.name }}</td>
+                <td>
+                    <a href="#" onclick="playVideo('{{ i.url }}'); return false;" style="text-decoration: none; color: #D2042D;">
+                        Click to Play 
+                        <i class="fa fa-play"></i>
+                    </a>
+                </td>
+                <td>{{ i.course_id.course_name }}</td>
+                <td>{{ i.staff_id.staff_name }}</td>
+                <td>{{ i.date }}</td>
+            </tr>
+            {% endfor %}
+        </thead>
+    </table>
+{% else %}
+    <h3>No Videos Available</h3>
+{% endif %}
+
+<script>
+    function playVideo(url) {
+        var videoId;
+        
+        // Check if the URL is a short URL
+        if (url.includes('youtu.be')) {
+            // Extract the video ID from the short URL
+            videoId = url.split('youtu.be/')[1];
+            // If there are additional parameters, remove them
+            if (videoId.includes('?')) {
+                videoId = videoId.split('?')[0];
+            }
+        } else {
+            // Extract the video ID from the standard URL
+            videoId = url.split('v=')[1];
+            // If there are additional parameters, remove them
+            if (videoId.includes('&')) {
+                videoId = videoId.split('&')[0];
+            }
+        }
+        
+        // Construct the embed URL
+        var embedUrl = 'https://www.youtube.com/embed/' + videoId;
+        
+        // Open the video in a new window or tab
+        window.open(embedUrl);
+    }
+</script>
+
+{% endblock %}

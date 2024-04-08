@@ -181,3 +181,15 @@ class notes(models.Model):
     
     class Meta:
         db_table = "notes"
+        
+class videos(models.Model):
+    video_id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=100)
+    url = models.CharField(max_length=100)
+    course_id = models.ForeignKey('course',on_delete=models.CASCADE)
+    date = models.DateField()
+    staff_id = models.ForeignKey('staff',on_delete=models.CASCADE)
+    
+    class Meta:
+        db_table = "videos"
+        

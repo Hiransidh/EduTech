@@ -32,7 +32,7 @@ urlpatterns = [
     path('not_eligible/', views.not_eligible),
     path('payment/', views.payment1),
     path('process_payment/', views.process_payment),
-    
+    path('back_to_login/', views.back_to_login),
     # --------- Admin ---------
     
     path('admin_home/', views.admin_home),
@@ -105,9 +105,18 @@ urlpatterns = [
     path('teacher_home/', views.teacher_home),
     path('add_notes/', views.add_notes),
     path('add_notes_post/', views.add_notes_post),
+    path('view_notes/', views.view_notes),
+    path('view_all_notes/', views.view_all_notes),
+    path('add_video/', views.add_video),
+    path('add_video_post/', views.add_video_post),
+    path('view_videos/', views.view_videos),
+    path('view_all_videos/', views.view_all_videos),
     
     #----------- Student ---------
     path('student_home/', views.student_home),
+    path('std_view_notes/', views.std_view_notes),
+    path('std_view_videos/', views.std_view_videos),
+    
     
 ]
 

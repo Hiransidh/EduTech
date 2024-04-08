@@ -1,0 +1,34 @@
+{% extends 'Teacher/teacher_home.html' %}
+{% block x %}
+
+    <table class="table table-bordered table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th>Sl No</th>
+                <th>Note</th>
+                <th>Download</th>
+                <th>Course</th>
+                <th>Faculty</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in data %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ i.name }}</td>
+                <td>
+                    <a href="{{ i.notes.url }}" download="{{ i.notes.name }}" style="text-decoration: none; color: #D2042D;">
+                        Download PDF
+                        <i class="fa fa-download"></i>
+                    </a>
+                </td>
+                <td>{{ i.course_id.course_name }}</td>
+                <td>{{ i.staff_id.staff_name }}</td>
+                <td>{{ i.date }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    {% endblock %}

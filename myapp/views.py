@@ -78,6 +78,12 @@ def logout(request):
 #         if flag==0:
 #             return HttpResponse("InvalidUser")
 
+def back_to_login(request):
+    var = student.objects.get(student_id=request.session['std'])
+    var.delete()
+    return redirect('/login/')
+
+
 def student_reg(request):
     data = branch.objects.all()
     data1 = course.objects.all()
@@ -742,11 +748,59 @@ def add_notes_post(request):
     return render(request, 'Teacher/add_notes.html')
     
 
+def view_notes(request):
+    val = request.session['Teacher']
+    data = staff.objects.get(email=val)
+    data1 = notes.objects.filter(staff_id=data.staff_id)
+   
+    return render(request, 'Teacher/view_notes.html', {'data1': data1})
+
+def view_all_notes(request):
+    data = notes.objects.all()
+    return render(request, 'Teacher/view_all_notes.html', {'data': data})
+
+def add_video(request):
+    data = staff.objects.get(email=request.session['Teacher'])
+    data2 = course.objects.all()
+    return render(request, 'Teacher/add_video.html', {'data': data, 'data2': data2})
+
+def add_video_post(request):
+    data = videos()
+    data.staff_id_id = request.POST.get('staff')
+    data.course_id_id = request.POST.get('course')
+    data.name = request.POST.get('name')
+    data.url = request.POST.get('url')
+    data.date = datetime.now()
+    
+    data.save()
+    return render(request, 'Teacher/add_video.html')
+
+def view_videos(request):
+    val = request.session['Teacher']
+    data = staff.objects.get(email=val)
+    data1 = videos.objects.filter(staff_id=data.staff_id)
+    return render(request, 'Teacher/view_videos.html', {'data1': data1})
+
+def view_all_videos(request):
+    data = videos.objects.all()
+    return render(request, 'Teacher/view_all_videos.html', {'data': data})
 # ------STUDENT--------
 
 def student_home(request):
     data = student.objects.get(email=request.session['Student'])
     return render(request, 'Student/student_home.html', {'data': data})
+
+def std_view_notes(request):
+    val = request.session['Student']
+    data = student.objects.get(email=val)
+    data1 = notes.objects.filter(course_id=data.course_id)
+    return render(request, 'Student/view_notes.html', {'data1': data1})
+
+def std_view_videos(request):
+    val = request.session['Student']
+    data1 = student.objects.get(email=val)
+    data = videos.objects.filter(course_id=data1.course_id)
+    return render(request, 'Student/view_videos.html', {'data': data})
 
 def send_complaint(request):
     return render(request, 'Student/send_complaint.html')
