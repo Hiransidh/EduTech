@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect,HttpResponse
 from myapp.models import *
 from datetime import datetime
+from django.http import JsonResponse
 
 from django.core.files.storage import FileSystemStorage
 # Create your views here.
@@ -83,6 +84,8 @@ def back_to_login(request):
     var.delete()
     return redirect('/login/')
 
+def enquiry(request):
+    return render(request, 'enquire.html')
 
 def student_reg(request):
     data = branch.objects.all()
@@ -129,7 +132,7 @@ def process_payment(request):
     data3 = fee.objects.get(course_id_id=data.student_id.course_id_id)
     
     data2 = bank.objects.get(bank_id=1)
-    if data2.card_number == request.POST.get('card_number') and data2.cvv == request.POST.get('cvv') and data2.exp_month == request.POST.get('exp_month') and data2.exp_year == request.POST.get('exp_year'):
+    if data2.card_number == request.POST.get('card_number') and data2.cvv == request.POST.get('cvv') and data2.exp_date == request.POST.get('exp_date'):
         
         if data2.amount>=float(request.POST.get('amount')):
             data.paid_amount = request.POST.get('amount')
@@ -501,11 +504,11 @@ def delete_branch(request,id):
 
 def add_staff(request):
     data=branch.objects.all()
-    return render(request, 'Admin/add_staff.html',{'data':data})
+    data2 = Subject.objects.all()
+    return render(request, 'Admin/add_staff.html',{'data':data, 'data2':data2})
 
 def add_staff_post(request):
     data = staff()
-    data.staff_id = request.POST.get('staff_id')
     data.staff_name = request.POST.get('staff_name')
     data.email = request.POST.get('email')
     data.phone = request.POST.get('phone')
@@ -516,6 +519,7 @@ def add_staff_post(request):
     data.pincode = request.POST.get('pincode')
     data.staff_type = request.POST.get('staff_type')
     data.branch_id_id = request.POST.get('branch_name')
+    data.subject = request.POST.get('subject')
     data.save()
     
     data2=login()
@@ -537,7 +541,8 @@ def delete_staff(request,id):
 
 def edit_staff(request,id):
     data = staff.objects.get(staff_id=id)
-    return render(request, 'Admin/edit_staff.html', {'data': data})
+    data2 = Subject.objects.all()
+    return render(request, 'Admin/edit_staff.html', {'data': data, 'data2': data2})
 
 def edit_staff_post(request):
     id = request.POST.get('staff_id')
@@ -639,10 +644,9 @@ def view_cc_profile(request):
 
 def add_class(request):
     data = course.objects.all()
-    data1 = staff.objects.filter(staff_type='mentor')
-    
-    
-    return render(request, 'Coordinator/add_class.html', {'data': data, 'data1': data1})
+    data1 = staff.objects.get(email=request.session['Course Coordinator']).branch_id
+    data2 = staff.objects.filter(staff_type='mentor',branch_id=data1)
+    return render(request, 'Coordinator/add_class.html', {'data': data, 'data2': data2})
 
 def add_class_post(request):
     data = batch()
@@ -670,9 +674,17 @@ def view_class(request):
 
 def add_student(request):
     data = course.objects.all()
-    var = request.POST.get('course')
-    data1 = batch.objects.filter(course_id=var)
-    return render(request, 'Coordinator/add_student.html', {'data': data, 'data1': data1})
+    # data1 = batch.objects.all()
+    # data2 = student.objects.all()
+    return render(request, 'Coordinator/add_student.html', {'data': data})
+def get_batch(request):
+    print("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh")
+    course_id=request.GET.get('course_id')
+    data1 = batch.objects.filter(course_id_id=course_id).values('batch_id','batch_name')
+    return JsonResponse(list(data1),safe=False)
+
+    
+    
 # ------MENTOR--------
 
 def mentor_home(request):

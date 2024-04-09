@@ -33,6 +33,9 @@ urlpatterns = [
     path('payment/', views.payment1),
     path('process_payment/', views.process_payment),
     path('back_to_login/', views.back_to_login),
+    path('enquiry/', views.enquiry),
+    path('get_batch/',views.get_batch),
+    
     # --------- Admin ---------
     
     path('admin_home/', views.admin_home),

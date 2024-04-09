@@ -10,14 +10,16 @@
             border-radius: 10px;
             border: 1px solid rgba(255, 255, 255, 0.125);
             padding: 20px;
-            width: 50%; /* Added this line */
-            margin: 0 auto; /* Added this line */
+            width: 50%;
+            /* Added this line */
+            margin: 0 auto;
+            /* Added this line */
         }
-    
+
         .form-group {
             margin-bottom: 20px;
         }
-    
+
         .form-control {
             background: rgba(255, 255, 255);
             border: 1px solid rgba(255, 255, 255, 0.125);
@@ -25,14 +27,14 @@
             padding: 10px;
             width: 100%;
         }
-    
+
         label {
             color: rgb(0, 0, 0);
             font-size: 20px;
             font-weight: 500;
             margin-bottom: 10px;
         }
-    
+
         .btn-primary {
             background: #f96d00;
             border: 1px solid #f96d00;
@@ -43,110 +45,130 @@
             color: #fff;
             cursor: pointer;
         }
-    
+
         .btn-primary:hover {
             background: #f96d00;
             border: 1px solid #f96d00;
             border-radius: 10px;
         }
-        
+
         .form-row {
             display: flex;
             flex-wrap: wrap;
             margin-right: -5px;
             margin-left: -5px;
         }
-        
+
         .form-row .form-group {
             flex: 0 0 50%;
             max-width: 50%;
             padding-right: 5px;
             padding-left: 5px;
         }
-      
     </style>
 
-<div class="card glassmorphic-card">
-    <div class="card-body">
+    <div class="card glassmorphic-card">
+        <div class="card-body">
 
-    <form action="/add_staff_post/" method="post">
-        {% csrf_token %}
-        <div class="form-group">
-            <label for="staffId">Staff ID</label>
-            <input type="text" class="form-control" id="staffId" name="staff_id" placeholder="Enter staff ID" required>
-        </div>
-        <div class="form-group">
-            <label for="staffName">Staff Name</label>
-            <input type="text" class="form-control" id="staffName" name="staff_name" placeholder="Enter staff name"
-                required>
-        </div>
+            <form action="/add_staff_post/" method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="staffName">Staff Name</label>
+                    <input type="text" class="form-control" id="staffName" name="staff_name"
+                        placeholder="Enter staff name" required>
+                </div>
 
-        <div class="form-row">
-            <div class="form-group">
-                <label for="staffEmail">Email</label>
-                <input type="email" class="form-control" id="staffEmail" name="email" placeholder="Enter staff email" required>
-            </div>
-            <div class="form-group">
-                <label for="staffPhone">Phone</label>
-                <input type="tel" class="form-control" id="staffPhone" placeholder="Enter staff phone number"
-                    name="phone" required>
-            </div>
-        </div>
-        
-        <div class="form-group">
-            <label for="qualification">Qualification</label>
-            <input type="text" class="form-control" id="qualification" name="qualification" placeholder="Enter qualification"
-                required>
-        </div>
-        <div class="form-group">
-            <label for="staffHome">House</label>
-            <input type="text" class="form-control" name="house" placeholder="Enter house name"
-                required>
-        </div>
-        <div class="form-group">
-            <div class="row">
-                <div class="col">
-                    <label for="staffCity">City</label>
-                    <input type="text" class="form-control" id="staffCity" name="city" placeholder="Enter city"
-                        required>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="staffEmail">Email</label>
+                        <input type="email" class="form-control" id="staffEmail" name="email"
+                            placeholder="Enter staff email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="staffPhone">Phone</label>
+                        <input type="tel" class="form-control" id="staffPhone" placeholder="Enter staff phone number"
+                            name="phone" required>
+                    </div>
                 </div>
-                <div class="col">
-                    <label for="staffState">State</label>
-                    <input type="text" class="form-control" id="staffState" name="state" placeholder="Enter state"
-                        required>
-                </div>
-                <div class="col">
-                    <label for="staffZip">Pin Code</label>
-                    <input type="text" class="form-control" name="pincode" placeholder="Enter pin code"
-                        required>
-                </div>
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="staffType">Staff Type</label>
-            <select class="form-control" id="staffPosition" name="staff_type" required>
-                <option value="">Select a staff type</option>
-                <option value="Branch Staff">Branch Staff</option>
-                <option value="Course Coordinator">Course Coordinator</option>
-                <option value="Teacher">Teacher</option>
-                <option value="Mentor">Mentor</option>
-                
-            </select>
 
-            <div class="form-group">
-                <label for="staffBranch">Branch</label>
-                <select class="form-control" id="staffBranch" name="branch_name" required>
-                    <option value="">Select a branch</option>
-                    {% for i in data %}
+                <div class="form-group">
+                    <label for="qualification">Qualification</label>
+                    <input type="text" class="form-control" id="qualification" name="qualification"
+                        placeholder="Enter qualification" required>
+                </div>
+                <div class="form-group">
+                    <label for="staffHome">House</label>
+                    <input type="text" class="form-control" name="house" placeholder="Enter house name" required>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col">
+                            <label for="staffCity">City</label>
+                            <input type="text" class="form-control" id="staffCity" name="city" placeholder="Enter city"
+                                required>
+                        </div>
+                        <div class="col">
+                            <label for="staffState">State</label>
+                            <input type="text" class="form-control" id="staffState" name="state"
+                                placeholder="Enter state" required>
+                        </div>
+                        <div class="col">
+                            <label for="staffZip">Pin Code</label>
+                            <input type="text" class="form-control" name="pincode" placeholder="Enter pin code"
+                                required>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="staffType">Staff Type</label>
+                    <select class="form-control" id="staffPosition" name="staff_type" required>
+                        <option value="">Select a staff type</option>
+                        <option value="Branch Staff">Branch Staff</option>
+                        <option value="Course Coordinator">Course Coordinator</option>
+                        <option value="Teacher">Teacher</option>
+                        <option value="Mentor">Mentor</option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+                    <label>Subject</label>
+                    <select name="subject" id="subjectSelect" class="form-control">
+                        <option value="">Select a subject</option>
+                        {% for i in data2 %}
+                        <option value="{{ i.name }}">{{ i.name }} -- {{i.course.course_name}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <script>
+                    document.getElementById("staffPosition").addEventListener("change", function () {
+                        var subjectDiv = document.getElementById("subjectSelect").parentNode;
+                        if (this.value === "Teacher") {
+                            subjectDiv.style.display = "block";
+                        } else {
+                            subjectDiv.style.display = "none";
+                        }
+                    });
+                </script>
+
+
+                <div class="form-group">
+                    <label for="staffBranch">Branch</label>
+                    <select class="form-control" id="staffBranch" name="branch_name" required>
+                        <option value="">Select a branch</option>
+                        {% for i in data %}
                         <option value="{{ i.branch_id }}">{{ i.branch_name }}</option>
-                    {% endfor %}
-                </select>
-            </div>
+                        {% endfor %}
+                    </select>
+                </div>
         </div>
         <button type="submit" class="btn btn-primary">Add Staff</button>
-    </form>
+        </form>
     </div>
-</div>
+    </div>
 
 </body>
 {% endblock x %}

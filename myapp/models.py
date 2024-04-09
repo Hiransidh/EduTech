@@ -44,7 +44,7 @@ class branch(models.Model):
         
 
 class staff(models.Model):
-    staff_id = models.IntegerField(primary_key=True)
+    staff_id = models.AutoField(primary_key=True)
     staff_name = models.CharField(max_length=100)
     email = models.EmailField()
     phone = models.CharField(max_length=15)
@@ -55,6 +55,7 @@ class staff(models.Model):
     pincode = models.IntegerField()
     staff_type = models.CharField(max_length=100,default="")
     branch_id = models.ForeignKey('branch',on_delete=models.CASCADE)
+    subject = models.CharField(max_length=100,default="")
     class Meta:
         db_table = "staff"
         
@@ -151,13 +152,10 @@ class Result(models.Model):
 class bank(models.Model):
     bank_id = models.AutoField(primary_key=True)
     card_number = models.CharField(max_length=100)
-    exp_month = models.CharField(max_length=100)
-    exp_year = models.CharField(max_length=100)
+    exp_date = models.CharField(max_length=100)
     cvv = models.CharField(max_length=100)
     amount=models.IntegerField(default=1000000)
 
-    
-    
     class Meta:
         db_table = "bank"
         

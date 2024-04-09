@@ -69,14 +69,8 @@
 
     <div class="card glassmorphic-card">
         <div class="card-body">
-data
             <form action="/edit_staff_post/#mysec" method="post">
                 {% csrf_token %}
-                <div class="form-group">
-                    <label for="staffId">Staff ID</label>
-                    <input type="text" class="form-control" id="staffId" name="staff_id" placeholder="Enter staff ID"
-                        value="{{ data.staff_id }}" required>
-                </div>
                 <div class="form-group">
                     <label for="staffName">Staff Name</label>
                     <input type="text" class="form-control" id="staffName" name="staff_name"
@@ -134,6 +128,27 @@ data
 
                     </select>
                 </div>
+                <div class="form-group">
+                    <label>Subject</label>
+                    <select name="subject" id="subjectSelect" class="form-control">
+                        <option value="">{{data.subject.name}}</option>
+
+                        {% for i in data2 %}
+                            <option value="{{ i.id }}">{{ i.name }} -- {{i.course.course_name}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <script>
+                    document.getElementById("staffPosition").addEventListener("change", function() {
+                        var subjectDiv = document.getElementById("subjectSelect").parentNode;
+                        if (this.value === "Teacher") {
+                            subjectDiv.style.display = "block";
+                        } else {
+                            subjectDiv.style.display = "none";
+                        }
+                    });
+                </script>
+        
                 <button type="submit" class="btn btn-primary">Update Staff</button>
             </form>
         </div>

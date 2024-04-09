@@ -1,4 +1,4 @@
-{% extends 'Mentor/mentor_home.html' %}
+{% extends 'Coordinator/coordinator_home.html' %}
 {% block x %}
 
 <body>
@@ -54,10 +54,9 @@
         <div class="card-body">
             <form action="/add_student_post/#mysec" method="post">
                 {% csrf_token %}
-
                 <div class="form-group">
                     <label>Course</label>
-                    <select class="form-control" name="course" id="course-select">
+                    <select class="form-control" name="course" id="course">
                         <option value="">Select Course</option>
                         {% for i in data %}
                         <option value="{{ i.course_id }}">{{ i.course_name }}</option>
@@ -66,29 +65,44 @@
                 </div>
                 <div class="form-group">
                     <label>Batch</label>
-                    <select class="form-control" name="batch" id="batch-select">
-                        <option value="">Select Batch</option>
-                        
+                    <select class="form-control" name="batch" id="batch">
+                        <!-- <option value="">Select Batch</option>
                         {% for i in data1 %}
                         <option value="{{i.batch_id}}">{{i.batch_name}}</option>
-                        {% endfor %}
-                            
-                       
+                        {% endfor %} -->
                     </select>
                 </div>
-                <div class="form-group"></div>
-                    <label for="students">Students:</label>
-                    <div class="checkbox-group">
-                        {% for i in data1 %}
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="{{ i.student_id }}" name="students" value="{{ i.id }}">
-                            <label class="form-check-labe">{{ i.student_name }}</label>
-                        </div>
-                        {% endfor %}
-                    </div>
-                </div>
 
+
+
+                <script>
+                    document.getElementById('course').addEventListener('change', function () {
+                        var courseValue = document.getElementById('course').value;
+                        var childDropdown = document.getElementById('batch');
+                        childDropdown.innerHTML = '';
+
+
+
+
+
+                        fetch('/get_batch/?course_id=' + courseValue)
+
+
+                            .then(response => response.json())
+                            .then(data => {
+                                data.forEach(child => {
+                                    var option = document.createElement('option');
+                                    option.value = child.batch_id;
+                                    option.text = child.batch_name;
+                                    childDropdown.appendChild(option);
+                                });
+                            });
+                    });
+                </script>
+                
+                
                 <button type="submit" class="btn btn-primary">Add Students</button>
+
             </form>
         </div>
     </div>

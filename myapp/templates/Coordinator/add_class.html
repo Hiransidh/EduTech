@@ -76,7 +76,7 @@
             <label for="teacher">Mentor</label>
             <select class="form-control" id="teacher" name="mentor" required>
                 <option value="">Select a Mentor</option>
-                {% for i in data1 %}
+                {% for i in data2 %}
                     <option value="{{ i.staff_id }}">{{ i.staff_name }}</option>
                 {% endfor %}
             </select>

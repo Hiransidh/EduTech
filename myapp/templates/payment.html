@@ -1,100 +1,164 @@
+<style>
+    body {
+        display: flex;
+        justify-content: center;
+        
+        height: 100vh;
+    }
+</style>
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Payment Page</title>
     <style>
-        /* CSS styles go here */
         body {
-            font-family: Arial, sans-serif;
-            text-align: center;
+    
+    justify-content: center;
+    
+}
+         h1, h3 {
+        color: #4e1e00;
+        font-weight: 600;
+    }
+        .form {
+            background: #0c0f14;
+            box-shadow: 0px 187px 75px rgba(0, 0, 0, 0.01),
+                0px 105px 63px rgba(0, 0, 0, 0.05), 0px 47px 47px rgba(0, 0, 0, 0.09),
+                0px 12px 26px rgba(0, 0, 0, 0.1), 0px 0px 0px rgba(0, 0, 0, 0.1);
+            width: 320px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            padding: 20px;
+            position: relative;
+            border-radius: 25px;
         }
 
-        h1 {
-            color: #333;
+        .form .label {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            height: -moz-fit-content;
+            height: fit-content;
         }
 
-        h3 {
-            color: #666;
+        .form .label:has(input:focus) .title {
+            top: 0;
+            left: 0;
+            color: #d17842;
         }
 
-        form {
+        .form .label .title {
+            padding: 0 10px;
+            transition: all 300ms;
+            font-size: 12px;
+            color: #8b8e98;
+            font-weight: 600;
+            width: -moz-fit-content;
+            width: fit-content;
+            top: 14px;
+            position: relative;
+            left: 15px;
+            background: #0c0f14;
+        }
+
+        .form .input-field {
+            width: auto;
+            height: 50px;
+            text-indent: 15px;
+            border-radius: 15px;
+            outline: none;
+            background-color: transparent;
+            border: 1px solid #21262e;
+            transition: all 0.3s;
+            caret-color: #d17842;
+            color: #aeaeae;
+        }
+
+        .form .input-field:hover {
+            border-color: rgba(209, 121, 66, 0.5);
+        }
+
+        .form .input-field:focus {
+            border-color: #d17842;
+        }
+
+        .form .split {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            width: 100%;
+            gap: 15px;
+        }
+
+        .form .split label {
+            width: 130px;
+        }
+
+        .form .checkout-btn {
             margin-top: 20px;
-        }
-
-        label {
-            display: inline-block;
-            width: 150px;
-            margin-bottom: 5px;
-            text-align: right;
-        }
-
-        input[type="text"] {
-            width: 200px;
-            padding: 5px;
-            margin-bottom: 10px;
-        }
-
-        input[type="submit"] {
-            padding: 10px 20px;
-            background-color: #333;
-            color: #fff;
-            border: none;
+            padding: 20px 0;
+            border-radius: 25px;
+            font-weight: 700;
+            transition: all 0.3s cubic-bezier(0.15, 0.83, 0.66, 1);
             cursor: pointer;
+            font-size: 20px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            border: none;
+            justify-content: center;
+            fill: #fff;
+            color: #fff;
+            border: 2px solid transparent;
+            background: #d17842;
+            transition: all 200ms;
         }
 
-        input[type="submit"]:hover {
-            background-color: #666;
+        .form .checkout-btn:active {
+            scale: 0.95;
+        }
+
+        .form .checkout-btn:hover {
+            color: #d17842;
+            border: 2px solid #d17842;
+            background: transparent;
         }
     </style>
-</head>
+</head>`
+
 <body>
-    <h1>Payment Page</h1>
-    <h3>Total Amount: <span>{{ data.amount }}</span></h3>
+    <section class="add-card page">
+      <center> <h1>Payment Page</h1>
+        <h3>Total Amount: <span>{{ data.amount }}</span></h3></center> 
+        <form class="form" action="/process_payment/" method="post">
+            {% csrf_token %}
+            <label for="first_instalment" class="label"><span class="title">First Instalment</span>
+            <input type="text" id="first_instalment" name="amount" class="input-field" value="{{ data.payment_per_month|floatformat }}"
+                readonly required>
+            </label>
 
-    <form action="/process_payment/" method="POST">
-        {% csrf_token %}
+            <label for="serialCardNumber" class="label">
+                <span class="title">Card Number</span>
+                <input id="serialCardNumber" class="input-field" type="number" name="card_number" title="Input title"
+                    placeholder="0000 0000 0000 0000" />
+            </label>
+            <div class="split">
+                <label for="ExDate" class="label">
+                    <span class="title">Expiry Date</span>
+                    <input id="ExDate" class="input-field" type="text" name="exp_date" title="Expiry Date"
+                        placeholder="01/23" />
+                </label>
+                <label for="cvv" class="label">
+                    <span class="title"> CVV</span>
+                    <input id="cvv" class="input-field" type="number" name="cvv" title="CVV" placeholder="CVV" />
+                </label>
+            </div>
+            <input class="checkout-btn" type="submit" value="Pay" />
+        </form>
+    </section>
 
-        <label for="first_instalment">First Instalment:</label>
-        <input type="text" id="first_instalment" name="amount" value="{{ data.payment_per_month|floatformat }}" readonly required>
-
-        <br>
-        <label for="card_number">Card Number:</label>
-        <input type="text" id="card_number" name="card_number" required>
-        <br>
-        <label for="expiry_date">Expiry Date:</label>
-        <select id="expiry_month" name="exp_month" required>
-            <option value="">Month</option>
-            <option value="01">01</option>
-            <option value="02">02</option>
-            <option value="03">03</option>
-            <option value="04">04</option>
-            <option value="05">05</option>
-            <option value="06">06</option>
-            <option value="07">07</option>
-            <option value="08">08</option>
-            <option value="09">09</option>
-            <option value="10">10</option>
-            <option value="11">11</option>
-            <option value="12">12</option>
-        </select>
-        <select id="expiry_year" name="exp_year" required>
-            <option value="">Year</option>
-            <option value="22">22</option>
-            <option value="23">23</option>
-            <option value="24">24</option>
-            <option value="25">25</option>
-            <option value="26">26</option>
-            <option value="27">27</option>
-            <option value="28">28</option>
-            <option value="29">29</option>
-            <option value="30">30</option>
-            <option value="31">31</option>
-        </select>
-        <br>
-        <label for="cvv">CVV:</label>
-        <input type="text" id="cvv" name="cvv" required>
-        <br>
-        <input type="submit" value="Pay">
-    </form>
 </body>
+
 </html>
