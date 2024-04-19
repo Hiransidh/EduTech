@@ -1,0 +1,126 @@
+{% extends 'Coordinator/coordinator_home.html' %}
+{% block x %}
+
+<style>
+    .glassmorphic-card {
+        background: rgba(41, 151, 255, 0.2);
+        backdrop-filter: blur(10px);
+        border-radius: 10px;
+        border: 1px solid rgba(255, 255, 255, 0.125);
+        padding: 20px;
+        width: 50%;
+        /* Added this line */
+        margin: 0 auto;
+        /* Added this line */
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-control {
+        background: rgba(255, 255, 255);
+        border: 1px solid rgba(255, 255, 255, 0.125);
+        border-radius: 10px;
+        padding: 10px;
+        width: 100%;
+    }
+
+    label {
+        color: rgb(0, 0, 0);
+        font-size: 20px;
+        font-weight: 500;
+        margin-bottom: 10px;
+    }
+
+    .btn-primary {
+        background: #f96d00;
+        border: 1px solid #f96d00;
+        border-radius: 10px;
+        padding: 10px 20px;
+        font-size: 20px;
+        font-weight: 500;
+        color: #fff;
+        cursor: pointer;
+    }
+
+    .btn-primary:hover {
+        background: #f96d00;
+        border: 1px solid #f96d00;
+        border-radius: 10px;
+    }
+
+    .form-row {
+        display: flex;
+        flex-wrap: wrap;
+        margin-right: -5px;
+        margin-left: -5px;
+    }
+
+    .form-row .form-group {
+        flex: 0 0 50%;
+        max-width: 50%;
+        padding-right: 5px;
+        padding-left: 5px;
+    }
+</style>
+<div class="card glassmorphic-card">
+    <div class="card-body">
+
+        <form action="/add_mock_test_post/" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label>Course</label>
+                <select class="form-control" name="course" required>
+                    <option value="">Select Course</option>
+                    {% for i in data  %}
+
+                        <option value="{{i.course_id}}">{{i.course_name}}</option>
+                        
+                    {% endfor %}
+                        
+                    </select>
+            <div class="form-group">
+                <label>Question</label>
+                <input type="text" class="form-control" name="question" placeholder="Enter Question" required>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Option 1</label>
+                    <input type="text" class="form-control" name="option1" placeholder="Enter Option 1" required>
+                </div>
+                <div class="form-group">
+                    <label>Option 2</label>
+                    <input type="text" class="form-control" name="option2" placeholder="Enter Option 2" required>
+                </div>
+                <div class="form-group">
+                    <label>Option 3</label>
+                    <input type="text" class="form-control" name="option3" placeholder="Enter Option 3" required>
+                </div>
+                <div class="form-group">
+                    <label>Option 4</label>
+                    <input type="text" class="form-control" name="option4" placeholder="Enter Option 4" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Answer</label>
+                <input type="text" class="form-control" name="answer" placeholder="Enter correct answer" required>
+            </div>
+
+            <div class="form-group">
+                <label>Level</label>
+                <select class="form-control" name="level" required>
+                    <option value="">Select Level</option>
+                    <option value="easy">Easy</option>
+                    <option value="medium">Medium</option>
+                    <option value="hard">Hard</option>
+                </select>
+            </div>
+            
+            
+            <button type="submit" class="btn btn-primary">Add Question</button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

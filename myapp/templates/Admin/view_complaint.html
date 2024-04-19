@@ -6,20 +6,30 @@
         <table class="table table-bordered table-hover">
             <tr>
                 <th>SI No</th>
+                <th>Complaint Date</th>
                 <th>Student Name</th>
                 <th>Branch Name</th>
-                <th>Complaint Date</th>
+                <th>Complaint</th>
                 <th>Complaint Status</th>
+                <th>Reply</th>
             </tr>
             {% for i in data %}
             <tr>
                 <td>{{ forloop.counter }}</td>
-                <td>{{ i.complaint_id }}</td>
-                <td>{{ i.STUDENT.student_name }}</td>
-                <td>{{ i.BRANCH.branch_name}}</td>
-                <td>{{ i.complaint_date }}</td>
-                <td>{{ i.complaint_status }}</td>
-                <td><a href="/view_complaint/{{ i.complaint_id }}#mysec" class="btn btn-success btn-sm">View</a></td>
+                <td>{{ i.date }}</td>
+                <td>{{ i.student_id.student_name }}</td>
+                <td>{{ i.branch_id.branch_name}}</td>
+                <td>{{i.complaint}}</td>
+                <td>{{ i.status }}</td>
+                
+                {% if i.status == 'replied' %}
+
+                <td>{{ i.reply }}</td>
+                {% else %}
+                <td><a href="/send_reply/{{ i.complaint_id }}">Reply</a></td>
+                {% endif %}
+                    
+                
             </tr>
             {% endfor %}
         </table>

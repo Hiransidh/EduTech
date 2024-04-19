@@ -14,10 +14,29 @@
     }
 </style>
 
-{% for i in data %}
+<table class="table table-bordered table-hover">
+    <thead class="thead-dark">
+        <tr>
+            <th>Sl No</th>
+            <th>Student</th>
+            <th>Course</th>
+            <th>Instalment_No</th>
+            <th>Paid Fee</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for i in data%}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{i.student_id.student_name}}</td>
+            <td>{{i.course_id.course_name}}</td>
+            <td>{{i.instalment_no}}</td>
+            <td>{{i.paid_amount}}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
 
-    <a href="/view_fee2/{{ i.batch_id }}#mysec" class="batch-link">{{ i.batch_name }}</a>
 
-{% endfor %}
+</table>
 
-{% endblock %}
+{% endblock x %}

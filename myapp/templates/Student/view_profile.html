@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Profile</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+        }
+    
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+    
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+    
+        .profile-image {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+    
+        .profile-image img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+    
+        .profile-info {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+    
+        .profile-info p {
+            margin: 5px 0;
+            font-size: 16px;
+        }
+    
+        .profile-info label {
+            font-weight: bold;
+            color: #333;
+        }
+    
+        /* Additional Styles */
+    
+        .profile-info p:last-child {
+            margin-bottom: 0;
+        }
+    
+        .profile-info p span {
+            color: #888;
+        }
+    
+        .profile-info p span.email {
+            font-style: italic;
+        }
+    
+        .profile-info p span.course {
+            font-weight: bold;
+        }
+    </style>
+    
+</head>
+<body>
+    <div class="container">
+        <h1>Student Profile</h1>
+        <div class="profile-image">
+            <img src="{{data.student_image.url}}" alt="Profile Image">
+        </div>
+        <div class="profile-info">
+            <p><label>Name:</label> {{data.student_name}}</p>
+            <p><label>Phone:</label> {{data.phone}}</p>
+            <p><label>Course:</label> {{data.course_id.course_name}}</p>
+            <p><label>Email:</label> {{data.email}}</p>
+        </div>
+    </div>
+</body>
+</html>

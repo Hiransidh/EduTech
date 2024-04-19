@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Receipt</title>
+    <style>
+        /* CSS Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            padding: 20px;
+        }
+
+        
+            .box {
+                max-width: 210mm;
+                height: 297mm;
+                margin: 20px auto;
+                padding: 20px;
+                background: #fff;
+                border: 1px solid #ddd;
+                box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            }
+            
+
+        h2 {
+            text-align: center;
+            font-size: 24px;
+            /* Increase the font size */
+        }
+
+        h3 {
+            text-align: center;
+
+        }
+
+        .receipt {
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            padding: 20px;
+            margin-top: 20px;
+            width: 400px;
+            margin: 0 auto;
+        }
+
+        .receipt p {
+            margin: 10px 0;
+            padding: 5px 0;
+        }
+
+        .receipt strong {
+            font-weight: bold;
+        }
+
+        .receipt-data {
+            float: right;
+        }
+
+        .date {
+            float: right;
+
+
+        }
+
+        hr {
+            margin-top: 20px;
+            margin-bottom: 20px;
+            border: 0;
+            border-top: 1px solid #000000;
+        }
+
+        .left {
+            float: left;
+            margin-left: 5px;
+            margin-bottom: 10px;
+        }
+
+        .right {
+            float: right;
+            margin-right: 5px;
+            margin-bottom: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f7f7f7;
+        }
+
+        tr {
+            border-bottom: none !important;
+        }
+
+        #null {
+            border-left: 1px solid #ddd !important;
+            border-right: 1px solid #ddd !important;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .footer p {
+            font-size: 14px;
+            color: #999;
+        }
+    </style>
+</head>
+
+<style>
+@media print {
+    body * {
+        visibility: hidden;
+    }
+    .inner-page, .inner-page * {
+        visibility: visible;
+}
+
+    #dnld {
+        display: none; /* Hide download button when printing */
+    }
+}
+</style>
+
+<body>
+    <section class="inner-page">
+        <div class="box">
+            <h3>EduTech</h3>
+            <br>
+            <h2>Fee Receipt</h2>
+            <br>
+            <span class="left">Payment Date : <span>{{ data.payment_date|date:"d-m-Y" }}</span></span>
+            <span class="right">Receipt Date : <span id="currentDate"></span></span>
+            <br>
+            <hr>
+
+            <p>
+
+                <span class="left"><strong>Name:</strong> <span>{{data.student_id.student_name}}</span></span>
+                <span class="right"><strong>Course:</strong> <span>{{data.course_id.course_name}}</span></span>
+            </p>
+            <br>
+            <hr>
+            <table class="table table-bordered">
+                <tr>
+                    <th>No</th>
+                    <th>Description</th>
+                    <th>Amount</th>
+                </tr>
+                <tr>
+                    <td style="border-bottom: 0;">1</td>
+                    <td style="border-bottom: 0;">Course Fee</td>
+                    <td style="border-bottom: 0;">{{data1.amount}}</td>
+                </tr>
+                <tr>
+                    <td style="border-top: 0; border-bottom: 0;">2</td>
+                    <td style="border-top: 0; border-bottom: 0;">Paid Amount</td>
+                    <td style="border-top: 0; border-bottom: 0;">{{data.paid_amount}}</td>
+                </tr>
+                <tr>
+                    <td style="border-top: 0; border-bottom: 0; border-left: 1px #ddd; border-right: 1px #ddd; ">&nbsp
+                    </td>
+                </tr>
+                <tr>
+                    <td style="border-top: 0; border-bottom: 0; border-left: 1px #ddd; border-right: 1px #ddd; ">&nbsp
+                    </td>
+                </tr>
+
+                <tr>
+
+                    <td style="border-top: 1px solid #000;;"></td>
+                    <td style="border-top: 1px solid #000;;">Total Paid</td>
+                    <td style="border-top: 1px solid #000;;">{{data.paid_amount}}</td>
+                </tr>
+
+
+            </table>
+            <div class="footer">
+                <p>Thank you for your payment!</p>
+            </div>
+            <hr>
+
+            <div style="text-align: center;"><button id="dnld" class="btn btn-success" style="align-items: center;"
+                    onclick="printAndHide()">Download</button></div>
+
+
+
+
+
+        </div>
+        <script>
+            function printAndHide() {
+                window.print(); // Print the page
+                document.getElementById('dnld').style.display = 'none'; // Hide the download button
+            }
+        </script>
+
+        <script>
+            // Get the current date
+            var currentDate = new Date();
+
+            // Format the date as desired (e.g., "dd-mm-yyyy")
+            var formattedDate = currentDate.toLocaleDateString('en-GB', {
+                day: '2-digit',
+                month: '2-digit',
+                year: 'numeric'
+            });
+
+            // Replace "/" with "-"
+            formattedDate = formattedDate.replace(/\//g, '-');
+
+            // Insert the formatted date into the HTML
+            document.getElementById("currentDate").textContent = formattedDate;
+        </script>
+    </section>
+</body>
+
+</html>

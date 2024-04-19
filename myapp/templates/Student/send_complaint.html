@@ -1,13 +1,67 @@
 {% extends 'Student/student_home.html'%}
 {% block x %}
+<style>
+    .form-group {
+        margin-bottom: 20px;
+    }
 
-<body>
+    h3 {
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
 
-    <form action="/send_complaint" method="POST">
-        <label for="complaint">Complaint:</label>
-        <textarea id="complaint" name="complaint" rows="4" cols="50"></textarea>
-        <br>
-        <input type="submit" value="Submit">
-    </form>
-   
-</body>
+    .form-control {
+        width: 100%;
+        padding: 10px;
+        font-size: 14px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        resize: vertical;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        font-size: 14px;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    .btn-primary:hover {
+        background-color: #0069d9;
+    }
+
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .table-bordered {
+        border: 1px solid #ccc;
+    }
+
+    .table-bordered td {
+        padding: 10px;
+        border: 1px solid #ccc;
+    }
+</style>
+
+<table class="table table-bordered">
+    <tr>
+        <td>
+            <form action="/send_complaint_post/" method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <h3>Complaint</h3>
+                    <textarea class="form-control" name="complaint" id="complaint" rows="5" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </td>
+    </tr>
+</table>
+
+{% endblock x %}

@@ -74,7 +74,7 @@
     <div class="form-group">
       <label for="courseDuration">Course Duration (months)</label>
       <input type="text" class="form-control" id="courseDuration" name="course_duration"
-        placeholder="Enter course duration" required>
+        placeholder="Enter course duration" required min="1" max="60" pattern="\d+">
     </div>
     <div class="form-group">
       <label for="courseDescription">Course Description</label>
@@ -84,7 +84,7 @@
     <div class="form-group">
       <label for="installments">Number of Installments</label>
       <input type="number" class="form-control" id="installments" placeholder="Enter number of installments"
-        name="no_of_installments" required>
+        name="no_of_installments" required min="1">
     </div>
     <div class="form-group">
       <label for="subject">Subject</label>

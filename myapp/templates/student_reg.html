@@ -121,12 +121,12 @@
                 <div class="form-group">
                     <label for="studentName">Student Name</label>
                     <input type="text" class="form-control" id="studentName" name="student_name"
-                        placeholder="Enter student name" required>
+                        placeholder="Enter student name" required pattern="[A-Za-z\s]+">
                 </div>
                 <div class="form-row">
                     <div class="form-group">
                         <label for="studentDob">Date of Birth</label>
-                        <input type="date" class="form-control" id="studentDob" name="dob" required>
+                        <input type="date" class="form-control" id="studentDob" name="dob" required max="2004-01-01">
                     </div>
                     <div class="form-group">
                         <label>Qualification</label>
@@ -143,7 +143,8 @@
 
                     <div class="form-group">
                         <label for="staffPhone">Phone</label>
-                        <input type="tel" class="form-control" placeholder="Enter phone number" name="phone" required>
+                        <input type="tel" class="form-control" placeholder="Enter phone number" name="phone" pattern="[0-9]{10}"
+                        title="Please enter a 10-digit phone number" required>
                     </div>
                 </div>
 
@@ -172,7 +173,8 @@
                     </div>
                     <div class="col">
                         <label for="staffZip">Pin Code</label>
-                        <input type="text" class="form-control" name="pincode" placeholder="Enter pin code" required>
+                        <input type="text" class="form-control" name="pincode" placeholder="Enter pin code" required pattern="\d{6}"
+                        title="Please enter a 6-digit pin code">
                     </div>
                 </div>
         </div>

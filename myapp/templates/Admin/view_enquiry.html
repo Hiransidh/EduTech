@@ -1,0 +1,73 @@
+{% extends 'Admin/admin_home.html' %}
+{% block x %}
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+
+<style>
+    th{
+        text-align: center;
+    }
+    .badge {
+        color: red;
+        padding: 10px 20px;
+        font-size: 15px;
+        margin: 10px;
+    }
+    .replied {
+        color: rgb(0, 179, 0);
+        font-weight: bold;
+    }
+    
+</style>
+<table class="table table-bordered">
+    <thead class="thead-dark">
+        <tr>
+            <th style="width: 65px;">Sl No</th>
+            <th style="width: 140px;">Date</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Enquiry</th>
+            <th style="width: 10px;">Reply</th>
+            <th></th>
+            
+
+        </tr>
+    </thead>
+    <tbody>
+        {% for i in data %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ i.date }}</td>
+            <td>{{ i.name }}</td>
+            <td>{{ i.email }}</td>
+            <td>{{ i.enquiry }}</td>
+            <td><center>
+                {% if i.status == 'pending' %}
+                <span class="badge">Pending</span>
+                
+                <a href="mailto:{{ i.email }}?subject=Reply%20for%20enquiry%20at%20EduTech&body=Regarding%20your%20enquiry:%20'%20{{ i.enquiry | urlencode }}%20'"
+                    class="btn btn-primary">Reply</a>
+                {% else %}
+                <span class="replied">REPLIED</span>
+                {% endif %}
+            </center>
+            </td>
+            
+            <td style="text-align: center; vertical-align:middle; "><center>
+                {% if i.status == 'pending' %}
+            <a href="/mark_as_replied/{{ i.enquiry_id }}" class="btn btn-success btn-sm">Mark as Replied</a>
+            {% else %}
+            <i class="fas fa-check"></i>
+            {% endif %}
+            </center>
+            
+            </td>
+                
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+{% endblock x %}

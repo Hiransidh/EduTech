@@ -80,7 +80,7 @@
         <div class="form-group">
             <label for="branchPhone">Branch Phone</label>
             <input type="tel" class="form-control" id="branchPhone" value="{{ data.phone }}"
-                name="phone" required>
+                name="phone" required pattern="\d{10}">
         </div>
         <button type="submit" class="btn btn-primary">Update Branch</button>
     </form>

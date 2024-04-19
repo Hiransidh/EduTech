@@ -1,0 +1,86 @@
+{% extends "login.html" %}
+
+{% block x %}
+<style>
+    /* Add your CSS styles here */
+    
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+        background-color: #c498dda8;
+    }
+    
+    .table-bordered {
+        border: 1px solid #ddd;
+    }
+    
+    .table-bordered td {
+        border: 1px solid #ddd;
+        padding: 8px;
+    }
+    
+    h1 {
+        font-size: 24px;
+        text-align: center;
+        margin-bottom: 20px;
+        font-weight: bold;
+    }
+    
+    label {
+        margin-left: 10px;
+        display: block;
+        margin-bottom: 10px;
+    }
+    
+    input[type="text"],
+    input[type="email"],
+    textarea {
+        width: 70%;
+        padding: 8px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        margin-left: 10px;
+        margin-bottom: 10px;
+    }
+    
+     
+    input[type="text"],
+    input[type="email"] {
+        width: 40%;
+    }
+    input[type="submit"] {
+        
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    
+    input[type="submit"]:hover {
+        background-color: #45a049;
+    }
+</style>
+<table class="table table-bordered">
+    <tr>
+        <td>
+            <h1>Enquiry Form</h1>
+            <form action="/enquiry_post/" method="POST">
+                {% csrf_token %}
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required><br><br>
+                
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required><br><br>
+                
+                <label for="message">Message:</label>
+                <textarea id="message" name="message" required></textarea><br><br>
+                
+                <input type="submit" value="Submit">
+            </form>
+        </td>
+    </tr>
+</table>
+   
+{% endblock x %}

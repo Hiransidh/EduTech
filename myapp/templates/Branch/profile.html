@@ -1,24 +1,18 @@
-<!DOCTYPE html>
-<html>
-<head>
-  
+{% extends 'Branch/branch_home.html' %}
+{% block x %}
     <style>
         /* Add your CSS styles here */
         /* For example: */
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f2f2f2;
-        }
+    
         .branch-details {
             border: 2px solid #333;
-            padding: 20px;
-            margin: 20px;
             background-color: #fff;
             text-align: center; /* Align center */
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
         .branch-details img {
-            max-width: 200px;
+            max-width: 350px;
+            margin: 10px;
             height: auto;
             border-radius: 50%;
             margin-bottom: 10px;
@@ -49,8 +43,7 @@
             border-radius: 5px;
         }
     </style>
-</head>
-<body>
+
     <div class="branch-details" style="width: fit-content; margin:10% 43%;" >
         
         <img src="{{branch.branch_image.url}}" alt="Branch Image">
@@ -61,5 +54,5 @@
 
         
     </div>
-</body>
-</html>
+
+{% endblock x %}

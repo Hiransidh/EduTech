@@ -60,18 +60,7 @@ class staff(models.Model):
         db_table = "staff"
         
         
-class complaint(models.Model):
-    complaint_id = models.IntegerField(primary_key=True)
-    complaint = models.TextField()
-    date= models.DateField()
-    status = models.CharField(max_length=100,default="pending")
-    STUDENT= models.ForeignKey('student',on_delete=models.CASCADE)
-    BRANCH= models.ForeignKey('branch',on_delete=models.CASCADE)
-    class Meta:
-        db_table = "complaint"
 
-
-        
 class fee(models.Model):
     fee_id = models.AutoField(primary_key=True)
     amount = models.FloatField()
@@ -95,6 +84,7 @@ class student(models.Model):
     pincode = models.IntegerField()
     course_id = models.ForeignKey('course',on_delete=models.CASCADE)
     branch_id = models.ForeignKey('branch',on_delete=models.CASCADE)
+    status = models.CharField(max_length=100)
     
     class Meta:
         db_table = "student"
@@ -119,7 +109,7 @@ class timetable(models.Model):
     period3 = models.CharField(max_length=100)
     period4 = models.CharField(max_length=100)
     period5 = models.CharField(max_length=100)
-    # staff_id = models.ForeignKey('staff',on_delete=models.CASCADE)
+    
             
     class Meta:
         db_table = "timetable"
@@ -159,15 +149,18 @@ class bank(models.Model):
     class Meta:
         db_table = "bank"
         
-class payment(models.Model):
+class student_fee_payment(models.Model):
     payment_id = models.AutoField(primary_key=True)
-    payment_date = models.DateField()
-    paid_amount = models.FloatField()
-    remaining_amount = models.FloatField()
     student_id = models.ForeignKey('student',on_delete=models.CASCADE)
-
+    course_id = models.ForeignKey('course',on_delete=models.CASCADE)
+    instalment_no = models.IntegerField(default=1)
+    paid_amount = models.FloatField()
+    due_date = models.DateField()
+    payment_date = models.DateField()
+    status = models.CharField(max_length=100)
+    
     class Meta:
-        db_table = "payment"   
+        db_table = "student_fee_payment"   
 
 class notes(models.Model):
     notes_id = models.AutoField(primary_key=True)
@@ -191,3 +184,52 @@ class videos(models.Model):
     class Meta:
         db_table = "videos"
         
+class mock_question(models.Model):
+    question_id = models.AutoField(primary_key=True)
+    question = models.TextField()
+    option1 = models.CharField(max_length=100)
+    option2 = models.CharField(max_length=100)
+    option3 = models.CharField(max_length=100)
+    option4 = models.CharField(max_length=100)
+    answer = models.CharField(max_length=100)
+    level = models.CharField(max_length=100)
+    course_id = models.ForeignKey('course',on_delete=models.CASCADE)
+    status = models.CharField(max_length=100)
+    
+    class Meta:
+        db_table = "mock_question"
+
+class mockresult(models.Model):
+    test_id=models.IntegerField(primary_key=True)
+    STUDENT=models.ForeignKey(student,on_delete=models.CASCADE)
+    impression=models.CharField(max_length=90)
+    date=models.DateField(max_length=90)
+    time=models.CharField(max_length=90)  
+    status=models.CharField(max_length=90)
+
+    class Meta:
+        db_table = "mockresult"   
+    
+class enquiry(models.Model):
+    enquiry_id = models.AutoField(primary_key=True)
+    enquiry = models.TextField()
+    date = models.DateField()
+    status = models.CharField(max_length=100,default="pending")
+    email = models.EmailField()
+    name = models.CharField(max_length=100)
+    
+    class Meta:
+        db_table = "enquiry"
+        
+class complaint(models.Model):
+    complaint_id = models.AutoField(primary_key=True)
+    complaint = models.TextField()
+    date = models.DateField()
+    status = models.CharField(max_length=100,default="pending")
+    student_id = models.ForeignKey('student',on_delete=models.CASCADE)
+    branch_id = models.ForeignKey('branch',on_delete=models.CASCADE)
+    reply = models.TextField(default="")
+    
+    class Meta:
+        db_table = "complaint"
+    

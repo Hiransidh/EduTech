@@ -1,0 +1,24 @@
+{% extends 'Coordinator/coordinator_home.html' %}
+{% block x %}
+<style>
+    * {
+        text-align: center;
+    }
+    a {
+        margin: 10px;
+    }
+    p {
+        font-size: 20px;
+        font-weight: 500;
+    }
+</style>
+<div style="display: block;">
+    <p>Select the course to view the mock test questions</p>
+
+
+    {% for i in data %}
+    <a href="/view_mock2/{{i.course_id.course_id}}#mysec" class="btn btn-dark">{{i.course_id.course_name}}</a>
+    {% endfor %}
+</div>
+
+{% endblock x %}

@@ -4,6 +4,7 @@
 <body>
   <form id="form1" name="form1" method="post" action="">
     <table class="table table-bordered table-hover">
+      <thead class="thead-dark">
       <tr>
         <th width="90px">Sl No</th>
         <th width="120px">Staff Name</th>
@@ -12,8 +13,9 @@
         <th>Qualification</th>
         <th>Staff Address</th>
         <th>Type</th>
-        
       </tr>
+      </thead>
+      <tbody>
       {% for i in data %}
       <tr>
         <td>{{ forloop.counter}}</td>
@@ -26,6 +28,7 @@
         
       </tr>
       {% endfor %}
+      </tbody>
     </table>
   </form>
 </body>

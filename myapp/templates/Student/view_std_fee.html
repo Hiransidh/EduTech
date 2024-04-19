@@ -1,0 +1,60 @@
+{% extends 'Student/student_home.html'%}
+{% block x %}
+<style>
+    td{
+        text-align: center;
+    }
+    th{
+        text-align: center;
+    }
+    .badge{
+        font-size: 16px;
+    }
+</style>
+<table class="table table-bordered">
+    <thead class="thead-dark">
+        <tr>
+            <th style="width: 80px;">Sl No</th>
+            <th>Instalment No</th>
+            <th>Amount</th>
+            <th>Due Date</th>
+            <th>Status</th>
+            
+            {% if i.status == 'paid' %}
+            <th>Paid Date</th>
+            {%else%}
+            <th>Pay</th>
+            {% endif %}
+                
+        </tr>
+    </thead>
+    <tbody>
+        {% for i in data1 %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ i.instalment_no }}</td>
+            <td>{{ i.paid_amount }}</td>
+            <td>{{ i.due_date }}</td>
+            
+            {% if i.status == 'paid' %}
+            <td><span class="badge badge-success">Paid</span></td>
+            {%else%}
+            <td><span class="badge badge-danger">Not Paid</span></td>
+                
+            {% endif %}
+                
+
+            {% if i.status == 'paid' %}
+            <td><a href="/receipt/{{i.payment_id}}">Receipt</a></td>
+            {%else%}
+            <td><a href="/pay_fee/{{ i.payment_id}}">Pay</a></td>
+            {% endif %}
+
+        </tr>
+
+        {% endfor %}
+    </tbody>
+
+</table>
+
+{% endblock %}

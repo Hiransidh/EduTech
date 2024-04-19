@@ -1,7 +1,11 @@
 {% extends 'Mentor/mentor_home.html' %}
 {% block x %}
-
-<h4>{{i.batch_name}}</h4>
+<style>
+    h4{
+        font-weight: bold;
+    }
+</style>
+<h4>{{data3.batch_name}}</h4>
 
 <table class="table table-bordered table-hover">
     <thead class="thead-dark">
@@ -12,6 +16,7 @@
         <th>Period 3</th>
         <th>Period 4</th>
         <th>Period 5</th>
+        <th></th>
         <th></th>
 
     </tr>
@@ -25,7 +30,8 @@
         <td>{{i.period3}}</td>
         <td>{{i.period4}}</td>
         <td>{{i.period5}}</td>
-        <td><a href="/edit_timetable/{{i.timetable_id}}#mysec">Edit</a></td>
+        <td><a href="/edit_timetable/{{i.timetable_id}}#mysec" class="btn btn-primary">Edit</a></td>
+        <td><a href="/delete_timetable/{{i.timetable_id}}#mysec" class="btn btn-danger">Delete</a></td>
 
     </tr>
     {% endfor %}

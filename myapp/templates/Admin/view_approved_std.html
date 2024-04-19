@@ -1,0 +1,56 @@
+{% extends "Admin/admin_home.html" %}
+{% block x %}
+<table class="table table-bordered">
+<thead class="thead-dark">
+    <tr>
+        <th style="width: 80px;">Sl No</th>
+        <th>Name</th>
+        <th>Course</th>
+        <th>Branch</th>
+        <th>Qualification</th>
+        <th>Phone</th>
+        <th>Email</th>
+        <th>Age</th>
+        
+    </tr>
+</thead>
+<tbody>
+    {% for i in data %}
+    <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>{{ i.student_name }}</td>
+        <td>{{ i.course_id.course_name }}</td>
+        <td>{{ i.branch_id.branch_name }}</td>
+        <td>{{ i.qualification }}</td>
+        <td>{{ i.phone }}</td>
+        <td>{{ i.email }}</td>
+        <td class="dob">{{ i.dob2 }}</td>
+
+        <script>
+            window.onload = function () {
+                var dobCells = document.getElementsByClassName('dob');
+                for (var i = 0; i < dobCells.length; i++) {
+                    var dob = new Date(dobCells[i].innerHTML);
+                    var age = calculateAge(dob);
+                    dobCells[i].innerHTML = age;
+                }
+            }
+
+            function calculateAge(dob) {
+                var diff_ms = Date.now() - dob.getTime();
+                var age_dt = new Date(diff_ms);
+
+                return Math.abs(age_dt.getUTCFullYear() - 1970);
+            }
+        </script>
+
+       
+    </tr>
+    {% endfor %}
+</tbody>
+</table>
+
+
+</script>
+
+{% endblock %}

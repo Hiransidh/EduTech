@@ -9,7 +9,7 @@
                 <th>Download</th>
                 <th>Course</th>
                 <th>Date</th>
-                <th></th>
+                
                 <th></th>
 
             </tr>
@@ -28,7 +28,7 @@
                 <td>{{ i.course_id.course_name }}</td>
                 
                 <td>{{ i.date }}</td>
-                <td><a href="/edit_notes/{{i.notes_id}}#mysec" class="btn btn-primary">Edit</a></td>
+                
                 <td><a href="/delete_notes/{{i.notes_id}}#mysec" class="btn btn-danger">Delete</a></td>
             </tr>
             {% endfor %}
